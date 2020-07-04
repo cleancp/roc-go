@@ -155,7 +155,7 @@
                 <!-- 项目基础目录 -->
                 <basepath>E:/</basepath>
                 <!-- 日志级别 -->
-                <log-level>DEBUG</log-level>
+                <log-level>INFO</log-level>
                 <!-- swagger开关 -->
                 <swagger-flag>true</swagger-flag>
             </properties>
@@ -169,7 +169,7 @@
             <properties>
                 <env>dev</env>
                 <basepath>/data/logs</basepath>
-                <log-level>DEBUG</log-level>
+                <log-level>INFO</log-level>
                 <swagger-flag>true</swagger-flag>
             </properties>
         </profile>

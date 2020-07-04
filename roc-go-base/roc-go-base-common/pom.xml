@@ -16,7 +16,7 @@
 
     <dependencies>
 
-        <!--spring boot-->
+        <!--       &lt;!&ndash;spring boot&ndash;&gt;
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -31,7 +31,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
+        </dependency>-->
 
         <!--工具类-->
         <dependency>

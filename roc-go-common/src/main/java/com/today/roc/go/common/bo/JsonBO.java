@@ -1,9 +1,14 @@
 package com.today.roc.go.common.bo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * ^---^---^---^---^---^---^---^
@@ -18,21 +23,40 @@ import java.util.List;
 @Data
 public class JsonBO implements Serializable {
 
+    @Expose(deserialize = false)
+    @SerializedName("xid")
     private Long id;
 
+    @Expose(serialize = false)
+    @SerializedName(value = "xname",alternate = {"yname","zname"})
     private String name;
 
+    @Expose
+    @SerializedName(value = "AGE",alternate = {"xage"})
     private Integer age;
 
+    @Expose
+    @SerializedName("MONEY")
     private Double money;
 
+    @Expose
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date birthday;
+
+    @Expose
+    @SerializedName("xlist")
     private List<JsonSubBO> dataList;
+
+    @SerializedName("xmap")
+    private Map<String,JsonSubBO> dataMap;
 
     @Data
     public static class JsonSubBO {
+        @SerializedName(value = "xxid",alternate = "id")
         private Long    id;
         private String  subname;
         private Integer subage;
         private Double  submoney;
+        private Date    subbirthday;
     }
 }

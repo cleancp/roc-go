@@ -21,7 +21,7 @@ public class LuceneAction {
         //查
         String keyword = "索引";
         ReaderIndex readerIndex = new ReaderIndex();
-        readerIndex.search(indexDir,keyword);
+        ReaderIndex.search(indexDir,keyword);
     }
 
 }

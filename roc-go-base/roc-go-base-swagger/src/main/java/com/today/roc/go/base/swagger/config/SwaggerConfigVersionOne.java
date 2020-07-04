@@ -2,7 +2,6 @@ package com.today.roc.go.base.swagger.config;
 
 import com.google.common.collect.Lists;
 import com.today.roc.go.base.swagger.properties.SwaggerProperties;
-import com.zhilingsd.base.swagger.starter.properties.SwaggerProperties;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

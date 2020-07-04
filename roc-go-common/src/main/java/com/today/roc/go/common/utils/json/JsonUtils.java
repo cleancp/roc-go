@@ -1,7 +1,8 @@
-package com.today.roc.go.common.utils;
+package com.today.roc.go.common.utils.json;
 
 import com.google.common.collect.Lists;
 import com.today.roc.go.common.bo.JsonBO;
+import com.today.roc.go.common.utils.ConverToChinesePart;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -18,13 +19,13 @@ import java.util.List;
  * @createTime 2020年07月02日 14:03*
  * log.info()
  */
-//@Slf4j
+@Slf4j
 public class JsonUtils {
 
     public static void main(String[] args) {
         String json = "{\"bo\":{\"age\":1,\"dataList\":[{\"id\":111111111111110,\"subage\":0,\"submoney\":10.66,\"subname\":\"\"},{\"id\":111111111111111,\"subage\":1,\"submoney\":11.66,\"subname\":\"壹元\"},{\"id\":111111111111112,\"subage\":2,\"submoney\":12.66,\"subname\":\"贰元\"},{\"id\":111111111111113,\"subage\":3,\"submoney\":13.66,\"subname\":\"叁元\"},{\"id\":111111111111114,\"subage\":4,\"submoney\":14.66,\"subname\":\"肆元\"}],\"id\":1234567890013213,\"money\":12.33,\"name\":\"李四\"},\"age\":1,\"array\":[{\"id\":111111111111110,\"subage\":0,\"submoney\":10.66,\"subname\":\"\"},{\"id\":111111111111111,\"subage\":1,\"submoney\":11.66,\"subname\":\"壹元\"},{\"id\":111111111111112,\"subage\":2,\"submoney\":12.66,\"subname\":\"贰元\"},{\"id\":111111111111113,\"subage\":3,\"submoney\":13.66,\"subname\":\"叁元\"},{\"id\":111111111111114,\"subage\":4,\"submoney\":14.66,\"subname\":\"肆元\"}]}\n";
 //        Object bo = JSONObject.toBean(JSONObject.fromObject(JSONObject.fromObject(json).get("bo")), JsonBO.class);
-//        System.out.println(bo);
+//        log.info(bo);
         JsonBO jsonBO = buildObject(JsonBO.class);
         testJSONArray(jsonBO);
     }
@@ -44,31 +45,29 @@ public class JsonUtils {
     public static void testJSONArray(JsonBO jsonBO) {
         //将对象转为JSONArray对象
         JSONArray jsonArray = JSONArray.fromObject(jsonBO);
-        System.out.println("jsonArray:"+jsonArray);
+        log.info("jsonArray:{}",jsonArray);
         JsonBO[] jsonBOS = (JsonBO[]) JSONArray.toArray(jsonArray, JsonBO.class);
-        System.out.println(jsonBOS);
+        log.info("jsonBOS:{}",jsonBOS);
         List<JsonBO.JsonSubBO> dataList = jsonBOS[0].getDataList();
-        System.out.println("dataList0:"+dataList.get(0));
-        JsonBO.JsonSubBO subBO = dataList.get(0);
-        System.out.println(subBO);
+        log.info("dataList0:"+dataList.get(0));
         JSONArray dataListArr = JSONArray.fromObject(dataList);
         JsonBO.JsonSubBO[] jsonSubBOS = (JsonBO.JsonSubBO[]) JSONArray.toArray(dataListArr, JsonBO.JsonSubBO.class);
-        System.out.println("---------------------");
+        log.info("---------------------");
         for (JsonBO.JsonSubBO jsonSubBO : jsonSubBOS) {
-            System.out.println(jsonSubBO);
+            log.info("jsonSubBO:{}",jsonSubBO);
         }
     }
 
     public static void testJSONObject(JsonBO jsonBO) {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("bo", jsonBO);
-        System.out.println(jsonObject.toString());
+        log.info(jsonObject.toString());
         Object o = JSONObject.toBean(jsonObject);
-        System.out.println(o);
+        log.info("o:{}",o);
 
         jsonObject.put("age", jsonBO.getAge());
         jsonObject.put("array", jsonBO.getDataList());
-        System.out.println(jsonObject.toString());
+        log.info(jsonObject.toString());
     }
 
     public static <T> T buildObject(Class<T> obj) {

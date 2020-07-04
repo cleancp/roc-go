@@ -1,8 +1,8 @@
 package com.today.roc.go.base.swagger.config;
 
 import com.google.common.collect.Lists;
-import com.zhilingsd.base.swagger.starter.constants.TechConstant;
-import com.zhilingsd.base.swagger.starter.properties.SwaggerProperties;
+import com.today.roc.go.base.swagger.constants.TechConstant;
+import com.today.roc.go.base.swagger.properties.SwaggerProperties;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;

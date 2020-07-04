@@ -1,4 +1,4 @@
-package com.today.roc.go.common.utils;
+package com.today.roc.go.common.utils.json;
 
 /**
  * ^---^---^---^---^---^---^---^
@@ -7,8 +7,11 @@ package com.today.roc.go.common.utils;
  * @author zou.cp
  * @version 1.0
  * @Description
- * @createTime 2020年07月02日 14:23*
+ * @createTime 2020年07月02日 14:04*
  * log.info()
  */
-public class JacksonUtils {
+public class FastjsonUtils {
+
+
+
 }

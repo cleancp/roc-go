@@ -1,5 +1,6 @@
 package com.today.roc.go.web;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,11 +20,13 @@ import java.util.Arrays;
  * @createTime 2020年07月02日 10:44*
  * log.info()
  */
-@SpringBootApplication(scanBasePackages = "com.today.*", exclude = DataSourceAutoConfiguration.class)
+@Slf4j
+@SpringBootApplication(scanBasePackages = "com.today.roc.go*", exclude = DataSourceAutoConfiguration.class)
 public class RocGoApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(RocGoApplication.class, args);
+        log.info("--------------启动成功----------------");
     }
 
     @Bean

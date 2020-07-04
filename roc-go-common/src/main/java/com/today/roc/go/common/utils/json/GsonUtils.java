@@ -1,4 +1,4 @@
-package com.today.roc.go.common.utils;
+package com.today.roc.go.common.utils.json;
 
 /**
  * ^---^---^---^---^---^---^---^

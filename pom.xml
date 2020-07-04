@@ -15,6 +15,7 @@
         <module>roc-go-dto</module>
         <module>roc-go-web</module>
         <module>roc-go-dal</module>
+        <module>roc-go-base</module>
     </modules>
 
     <parent>

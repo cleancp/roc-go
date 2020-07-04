@@ -1,4 +1,4 @@
-package priv.lucene.util;
+package com.today.roc.go.common.utils.lucene;
 
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;

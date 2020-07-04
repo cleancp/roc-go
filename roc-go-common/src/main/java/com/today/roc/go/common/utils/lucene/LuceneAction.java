@@ -1,8 +1,6 @@
-package priv.lucene.action;
+package com.today.roc.go.common.utils.lucene;
 
 import org.apache.lucene.queryParser.ParseException;
-import priv.lucene.util.ReaderIndex;
-import priv.lucene.util.WriterIndex;
 
 import java.io.IOException;
 

@@ -11,5 +11,15 @@
 
     <artifactId>roc-go-dal</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.today</groupId>
+            <artifactId>roc-go-dto</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.today</groupId>
+            <artifactId>roc-go-common</artifactId>
+        </dependency>
 
+    </dependencies>
 </project>

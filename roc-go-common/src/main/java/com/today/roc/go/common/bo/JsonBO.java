@@ -1,5 +1,8 @@
 package com.today.roc.go.common.bo;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson.annotation.JSONType;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -24,30 +27,31 @@ import java.util.Map;
 public class JsonBO implements Serializable {
 
     @Expose(deserialize = false)
-    @SerializedName("xid")
+    @SerializedName(value = "xid",alternate = "id")
     private Long id;
 
     @Expose(serialize = false)
-    @SerializedName(value = "xname",alternate = {"yname","zname"})
+    @SerializedName(value = "xname",alternate = {"yname","zname","name"})
     private String name;
 
     @Expose
-    @SerializedName(value = "AGE",alternate = {"xage"})
+    @SerializedName(value = "AGE",alternate = {"xage","age"})
     private Integer age;
 
     @Expose
-    @SerializedName("MONEY")
+    @SerializedName(value = "MONEY",alternate = "money")
     private Double money;
 
     @Expose
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss:SSS")
     private Date birthday;
 
     @Expose
-    @SerializedName("xlist")
+    @SerializedName(value = "xlist",alternate = "dataList")
     private List<JsonSubBO> dataList;
 
-    @SerializedName("xmap")
+    @SerializedName(value = "xmap",alternate = "dataMap")
     private Map<String,JsonSubBO> dataMap;
 
     @Data

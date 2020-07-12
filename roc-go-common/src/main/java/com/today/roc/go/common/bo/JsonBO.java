@@ -40,7 +40,7 @@ public class JsonBO implements Serializable {
 
     @Expose
     @SerializedName(value = "MONEY",alternate = "money")
-    private Double money;
+    private transient Double money;
 
     @Expose
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
@@ -55,7 +55,7 @@ public class JsonBO implements Serializable {
     private Map<String,JsonSubBO> dataMap;
 
     @Data
-    public static class JsonSubBO {
+    public static class JsonSubBO implements Serializable{
         @SerializedName(value = "xxid",alternate = "id")
         private Long    id;
         private String  subname;

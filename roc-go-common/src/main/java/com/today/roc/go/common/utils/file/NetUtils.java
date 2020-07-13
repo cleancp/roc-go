@@ -5,6 +5,9 @@ import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.UnknownHostException;
+import java.nio.ByteBuffer;
+import java.nio.channels.Channel;
+import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
@@ -21,8 +24,12 @@ import java.util.Objects;
 public class NetUtils {
 
     public static void main(String[] args) throws IOException {
+        String filePath = "E:\\java\\testfile\\Xftp-6.0.0105p.exe";
+        String sourcePath = "E:\\java\\testfile\\alibaba\\Xftp-6.0.0105p.exe";
 //        testInetAddress();
-        testURL();
+//        testURL();
+//        fastCopy(sourcePath,filePath);
+
     }
 
     public static void testURL() throws IOException {
@@ -50,7 +57,35 @@ public class NetUtils {
         System.out.println(loopbackAddress.getCanonicalHostName());
         System.out.println(loopbackAddress.getHostAddress());
         System.out.println(loopbackAddress.getHostName());
-
     }
 
+    public static void fastCopy(String sourcePath, String targetDist) throws IOException {
+        Long start = System.currentTimeMillis();
+        //获取输入文件字节流
+        FileInputStream fis = new FileInputStream(new File(sourcePath));
+        //获取输入字节流的文件通道
+        FileChannel fisChannel = fis.getChannel();
+        //获取输出文件字节流
+        FileOutputStream fos = new FileOutputStream(new File(targetDist));
+        //获取输出字节流的文件通道
+        FileChannel fosChannel = fos.getChannel();
+        //为缓冲区分配 1024 字节大小
+        ByteBuffer buffer = ByteBuffer.allocateDirect(20*1024);
+
+        while (true) {
+            //将输入字节流读取到缓冲区中
+            int read = fisChannel.read(buffer);
+            //如果read= -1 表示EOF
+            if (read == -1) {
+                break;
+            }
+            //切换读写
+            buffer.flip();
+            //缓冲区写入目标文件
+            fosChannel.write(buffer);
+            //清除缓冲区
+            buffer.clear();
+        }
+        System.out.println(System.currentTimeMillis()-start);
+    }
 }

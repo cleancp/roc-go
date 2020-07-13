@@ -22,22 +22,27 @@ public class FileUtils {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         String filePath = "E:\\java\\testfile";
-        String sourcePath = "E:\\java\\testfile\\alibaba\\druid\\1.0.11\\druid-1.0.11.jar";
+        String sourcePath = "E:\\java\\testfile\\alibaba\\Xftp-6.0.0105p.exe";
         String logFilePath = "E:\\java\\testfile\\info.log";
         //showListFile(new File(filePath));
         //copyFileTo(sourcePath, "E:\\java\\testfile");
-        //copyFile(sourcePath,"E:\\java\\testfile\\druid-1.0.11.jar");
+        Long start = System.currentTimeMillis();
+        copyFile(sourcePath, "E:\\java\\testfile\\Xftp-6.0.0105p.exe");
+        System.out.println(System.currentTimeMillis() - start);
 //        String decode = decode(encode("你好123abc,.?", StandardCharsets.UTF_8.displayName()), StandardCharsets.UTF_8.displayName());
 //        System.out.println(decode);
 //        readLine(logFilePath);
-        serialize();
+//        serialize();
 
     }
-    /**类中所有属性都要序列化*/
+
+    /**
+     * 类中所有属性都要序列化
+     */
     public static void serialize() throws IOException, ClassNotFoundException {
         JsonBO jsonBO = JsonUtils.buildObject(JsonBO.class, 10);
         File file = new File("E:\\java\\testfile\\jsonBo");
-        if (!file.exists()){
+        if (!file.exists()) {
             file.createNewFile();
         }
         ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(file));
@@ -45,7 +50,7 @@ public class FileUtils {
         outputStream.close();
 
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
-        JsonBO o = (JsonBO)ois.readObject();
+        JsonBO o = (JsonBO) ois.readObject();
         ois.close();
         System.out.println(o);
     }
@@ -53,8 +58,8 @@ public class FileUtils {
     public static void readLine(String filePath) throws IOException {
         FileReader fileReader = new FileReader(filePath);
         BufferedReader br = new BufferedReader(fileReader);
-        String line ;
-        while (Objects.nonNull(line = br.readLine())){
+        String line;
+        while (Objects.nonNull(line = br.readLine())) {
             System.out.println(line);
         }
         // 装饰者模式使得 BufferedReader 组合了一个 Reader 对象

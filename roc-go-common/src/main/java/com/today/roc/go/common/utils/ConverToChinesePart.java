@@ -213,7 +213,7 @@ public class ConverToChinesePart {
     }
     //程序入口
     public static void main(String[] args) {
-        ConverToChinesePart conver = new ConverToChinesePart(1010101010.12);
+        ConverToChinesePart conver = new ConverToChinesePart(199.82);
         System.out.println(conver.convertToChinese());
     }
 

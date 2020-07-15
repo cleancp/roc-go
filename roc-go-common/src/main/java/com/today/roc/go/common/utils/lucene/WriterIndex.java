@@ -102,6 +102,7 @@ public class WriterIndex {
      * 写入索引的内容判断
      */
     private static class TextFilesFilter implements FileFilter{
+        @Override
         public boolean accept(File pathname) {
             return pathname.getName().toLowerCase().endsWith(".txt");
         }

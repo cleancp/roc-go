@@ -82,7 +82,7 @@ public class JacksonUtils {
         return obj;
     }
 
-    public static String toJson(Object obj) throws JsonProcessingException {
+    public static String toJson(Object obj) {
         ObjectMapper mapper = new ObjectMapper();
         //在序列化时日期格式默认为 yyyy-MM-dd'T'HH:mm:ss.SSSZ  如果有注解 优先注解
         mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
@@ -90,15 +90,25 @@ public class JacksonUtils {
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         //忽略值为默认值的属性
         mapper.setDefaultPropertyInclusion(JsonInclude.Include.NON_DEFAULT);
-        String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
+        String json = null;
+        try {
+            json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
         return json;
     }
 
-    public static <T> T fromJson(String json, Class<T> clazz) throws IOException {
+    public static <T> T fromJson(String json, Class<T> clazz)  {
         ObjectMapper mapper = new ObjectMapper();
         //在反序列化时忽略在 JSON 中存在但 Java 对象不存在的属性
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        T t = mapper.readValue(json, clazz);
+        T t = null;
+        try {
+            t = mapper.readValue(json, clazz);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return t;
     }
 

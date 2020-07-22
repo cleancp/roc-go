@@ -6,9 +6,7 @@ import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.*;
 
 import java.util.List;
 
@@ -22,10 +20,12 @@ import java.util.List;
  * @createTime 2020年07月04日 13:25*
  * log.info()
  */
-
+//
+//implements WebMvcConfigurer
+//extends WebMvcConfigurationSupport
 @EnableWebMvc
 @Configuration
-public class WebConfig  extends WebMvcConfigurerAdapter {
+public class WebConfig  extends WebMvcConfigurationSupport {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

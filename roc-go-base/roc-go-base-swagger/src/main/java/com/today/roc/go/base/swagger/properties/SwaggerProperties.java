@@ -11,7 +11,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = SwaggerProperties.SWAGGER_PREFIX)
 public class SwaggerProperties {
 
-    public static final String SWAGGER_PREFIX ="zlsd.swagger";
+    public static final String SWAGGER_PREFIX ="roc.swagger";
 
 
     /**

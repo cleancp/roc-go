@@ -1,3 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 com.today.roc.go.base.swagger.config.SwaggerConfigVersionTwo,\
 com.today.roc.go.base.swagger.config.SwaggerConfigVersionOne
+com.today.roc.go.base.swagger.config.SwaggerConfigVersion

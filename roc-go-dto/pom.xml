@@ -16,6 +16,10 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.today</groupId>
+            <artifactId>roc-go-base-swagger</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

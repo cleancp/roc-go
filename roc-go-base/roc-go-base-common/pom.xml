@@ -34,10 +34,10 @@
         </dependency>-->
 
         <!--工具类-->
-        <dependency>
-            <groupId>com.google.collections</groupId>
-            <artifactId>google-collections</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.google.collections</groupId>-->
+<!--            <artifactId>google-collections</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>

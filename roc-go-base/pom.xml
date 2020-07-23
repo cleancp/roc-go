@@ -92,11 +92,6 @@
             </dependency>
 
             <dependency>
-                <groupId>com.google.collections</groupId>
-                <artifactId>google-collections</artifactId>
-                <version>${google-collections.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>commons-httpclient</groupId>
                 <artifactId>commons-httpclient</artifactId>
                 <version>${commons-httpclient.version}</version>
@@ -148,8 +143,6 @@
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson_version}</version>
             </dependency>
-
-
 
             <dependency>
                 <groupId>net.sf.oval</groupId>

@@ -1,9 +1,14 @@
 package com.today.roc.go.web.config;
 
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.ByteArrayHttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
+
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Software License Declaration.
@@ -30,14 +35,24 @@ import org.springframework.web.client.RestTemplate;
  * @author zou.cp
  * @version 1.0
  * @Description
- * @createTime 2020年07月23日 17:46*
+ * @createTime 2020年07月23日 20:32*
  * log.info()
+ *  使用restTemplate文件上传 , 处理文件名乱码
  */
 @Configuration
 public class RestConfig {
+
     @Bean
-    public RestTemplate restTemplate(RestTemplateBuilder builder) {
-        // Do any additional configuration here
-        return builder.build();
+    public RestTemplate restTemplate() {
+        RestTemplate restTemplate = new RestTemplate();
+        Charset defaultCharset = StandardCharsets.UTF_8;
+        restTemplate.getMessageConverters().clear();
+        restTemplate.getMessageConverters().add(new ByteArrayHttpMessageConverter());
+        restTemplate.getMessageConverters().add(new StringHttpMessageConverter(defaultCharset));
+        restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+        //FormHttpMessageConverter->CgbFormHttpMessageConverter重写getAsciiBytes方法处理文件上传文件名乱码
+        restTemplate.getMessageConverters().add(new CgbFormHttpMessageConverter());
+        return restTemplate;
     }
+
 }

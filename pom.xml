@@ -16,6 +16,7 @@
         <module>roc-go-web</module>
         <module>roc-go-dal</module>
         <module>roc-go-base</module>
+        <module>roc-go-spring</module>
     </modules>
 
     <properties>

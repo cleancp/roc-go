@@ -1,6 +1,8 @@
 package com.today.roc.go.spring.beans.lookup_method;
 
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.stereotype.Component;
+import sun.java2d.DisposerRecord;
 
 /**
  * ^---^---^---^---^---^---^---^
@@ -13,10 +15,15 @@ import org.springframework.stereotype.Component;
  * log.info()
  */
 @Component
-public class Teacher extends User{
+public class Teacher extends User implements DisposableBean {
 
     @Override
     public void showMe() {
         System.out.println("i am teacher");
+    }
+
+    @Override
+    public void destroy() throws Exception {
+        System.out.println(this.getClass().getSimpleName()+"实现 DisposableBean destory");
     }
 }

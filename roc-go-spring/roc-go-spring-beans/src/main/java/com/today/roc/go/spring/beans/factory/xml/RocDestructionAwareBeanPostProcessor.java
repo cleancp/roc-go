@@ -18,6 +18,6 @@ import org.springframework.stereotype.Component;
 public class RocDestructionAwareBeanPostProcessor implements DestructionAwareBeanPostProcessor {
     @Override
     public void postProcessBeforeDestruction(Object o, String s) throws BeansException {
-        System.out.println(o.getClass().getSimpleName()+"close"+s);
+        System.out.println(o.getClass().getSimpleName()+" 销毁 "+s);
     }
 }

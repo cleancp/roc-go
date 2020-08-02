@@ -18,14 +18,14 @@ public class RocBeanDefinitionDocumentReader extends DefaultBeanDefinitionDocume
     //解析前处理
     @Override
     protected void preProcessXml(Element root) {
+        System.out.println("使用自定义RocBeanDefinitionDocumentReader pre");
         super.preProcessXml(root);
-        System.out.println(root);
     }
 
     //解析前处理
     @Override
     protected void postProcessXml(Element root) {
+        System.out.println("使用自定义RocBeanDefinitionDocumentReader post");
         super.postProcessXml(root);
-        System.out.println(root);
     }
 }

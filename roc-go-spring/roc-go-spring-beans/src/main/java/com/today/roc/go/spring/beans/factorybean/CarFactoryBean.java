@@ -22,7 +22,7 @@ import java.math.BigDecimal;
 public class CarFactoryBean implements FactoryBean<Car> {
 
     @Value("本田,SUV,1000000.12")
-    private String carInfo;
+    private String carInfo = "本田,SUV,1000000.12";
 
     @Override
     public Car getObject() {

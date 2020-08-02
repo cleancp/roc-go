@@ -17,5 +17,6 @@ public class RocXmlApplicationContextMain {
         for (String beanDefinitionName : beanDefinitionNames) {
             System.out.println(beanDefinitionName);
         }
+        ac.close();
     }
 }

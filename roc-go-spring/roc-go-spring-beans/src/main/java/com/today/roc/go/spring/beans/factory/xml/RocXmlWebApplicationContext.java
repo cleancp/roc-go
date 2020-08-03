@@ -1,5 +1,6 @@
 package com.today.roc.go.spring.beans.factory.xml;
 
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
@@ -32,4 +33,9 @@ public class RocXmlWebApplicationContext extends ClassPathXmlApplicationContext 
         super.initBeanDefinitionReader(beanDefinitionReader);
     }
 
+    @Override
+    protected void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) {
+        super.postProcessBeanFactory(beanFactory);
+        System.out.println("对BeanFactory做自定义处理");
+    }
 }

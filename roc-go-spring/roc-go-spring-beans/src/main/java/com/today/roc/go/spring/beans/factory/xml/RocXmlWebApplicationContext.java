@@ -1,11 +1,9 @@
 package com.today.roc.go.spring.beans.factory.xml;
 
-import com.today.roc.go.spring.beans.bean.processor.RocBeanPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.support.XmlWebApplicationContext;
 
 /**
  * ^---^---^---^---^---^---^---^

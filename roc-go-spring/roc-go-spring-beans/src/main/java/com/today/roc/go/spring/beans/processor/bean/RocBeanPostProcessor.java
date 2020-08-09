@@ -1,4 +1,4 @@
-package com.today.roc.go.spring.beans.bean.processor;
+package com.today.roc.go.spring.beans.processor.bean;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -19,13 +19,13 @@ public class RocBeanPostProcessor implements BeanPostProcessor {
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        System.out.println(this.getClass().getSimpleName() +"调用postProcessBeforeInitialization");
+        //System.out.println(this.getClass().getSimpleName() +"调用postProcessBeforeInitialization");
         return null;
     }
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        System.out.println(this.getClass().getSimpleName() +"调用postProcessAfterInitialization");
+        //System.out.println(this.getClass().getSimpleName() +"调用postProcessAfterInitialization");
         return null;
     }
 }

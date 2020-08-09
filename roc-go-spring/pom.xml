@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>roc-go-spring-beans</module>
+        <module>roc-go-spring-aop</module>
     </modules>
 
         <dependencies>

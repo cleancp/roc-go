@@ -23,7 +23,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class KeywordRecordDto {
+public class RocKeywordRecordDto {
 
     @ApiModelProperty(value = "关键词")
     private String keyword;

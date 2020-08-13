@@ -18,10 +18,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class AspectJTest {
 
-    @Pointcut("execution(* *.test(..))")
+    @Pointcut("@annotation(com.today.roc.go.spring.aop.annotation.TestAspectJ)")
     public void test() {
 
     }
+
+//    @Pointcut("execution(* *.test(..))")
+//    public void test() {
+//
+//    }
 
     @Before("test()")
     public void beforeTest(){

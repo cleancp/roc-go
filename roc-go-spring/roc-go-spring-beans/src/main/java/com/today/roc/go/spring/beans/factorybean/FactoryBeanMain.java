@@ -1,8 +1,11 @@
 package com.today.roc.go.spring.beans.factorybean;
 
 import com.today.roc.go.spring.beans.lookup_method.GetReturnBeanTest;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.InputStreamSource;
 
 /**
  * ^---^---^---^---^---^---^---^
@@ -17,7 +20,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class FactoryBeanMain {
 
     public static void main(String[] args) {
-        ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+        XmlBeanFactory ac = new XmlBeanFactory(new ClassPathResource("applicationContext_default.xml"));
         Car car = (Car) ac.getBean("carFactoryBean");
         CarFactoryBean carFactoryBean = (CarFactoryBean) ac.getBean("&carFactoryBean");
         System.out.println(car);

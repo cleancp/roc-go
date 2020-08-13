@@ -3,8 +3,8 @@ package com.today.roc.go.web.index;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.collect.Lists;
 import com.today.roc.go.common.utils.json.JacksonUtils;
-import com.today.roc.go.dto.request.homepage.HomePageDto;
-import com.today.roc.go.dto.request.homepage.KeywordRecordDto;
+import com.today.roc.go.dto.request.homepage.RocHomePageDto;
+import com.today.roc.go.dto.request.homepage.RocKeywordRecordDto;
 import com.today.roc.go.dto.response.homepage.HomeOthersVo;
 import com.today.roc.go.dto.response.homepage.HomePageVo;
 import com.today.roc.go.dto.response.homepage.KeyWordTeamVo;
@@ -49,7 +49,7 @@ public class HomePageController {
      **/
     @PostMapping("keyWordComposeStatistics")
     @ApiOperation(value = "关键词组命中排名")
-    public List<KeyWordTeamVo> keyWordComposeStatistics(@RequestBody @Valid HomePageDto dto) {
+    public List<KeyWordTeamVo> keyWordComposeStatistics(@RequestBody @Valid RocHomePageDto dto) {
         System.out.println(JacksonUtils.toJson(dto));
         return Lists.newArrayList();
     }
@@ -60,14 +60,14 @@ public class HomePageController {
      **/
     @PostMapping("othersStatistics")
     @ApiOperation(value = "关键词,分公司,机构命中")
-    public HomeOthersVo othersStatistics(@RequestBody @Valid HomePageDto dto) {
+    public HomeOthersVo othersStatistics(@RequestBody @Valid RocHomePageDto dto) {
         System.out.println(JacksonUtils.toJson(dto));
         return new HomeOthersVo();
     }
 
     @PostMapping("keywordRecordList")
     @ApiOperation(value = "关键词关联的质检记录")
-    public void keywordRecordList(@RequestBody @Valid KeywordRecordDto dto) throws JsonProcessingException {
+    public void keywordRecordList(@RequestBody @Valid RocKeywordRecordDto dto) throws JsonProcessingException {
         System.out.println(JacksonUtils.toJson(dto));
     }
 

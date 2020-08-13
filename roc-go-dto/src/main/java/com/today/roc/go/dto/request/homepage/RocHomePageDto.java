@@ -25,7 +25,7 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class HomePageDto implements Serializable {
+public class RocHomePageDto implements Serializable {
 
     @ApiModelProperty(value = "关键词组ID(关键词组命中排名接口不需要传)")
     private Long keyWordTeamId;

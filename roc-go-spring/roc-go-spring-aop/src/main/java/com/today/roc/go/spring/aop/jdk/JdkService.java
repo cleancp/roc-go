@@ -12,6 +12,6 @@ package com.today.roc.go.spring.aop.jdk;
  */
 public interface JdkService {
 
-    public abstract void test();
+    public abstract void test(String a);
 
 }

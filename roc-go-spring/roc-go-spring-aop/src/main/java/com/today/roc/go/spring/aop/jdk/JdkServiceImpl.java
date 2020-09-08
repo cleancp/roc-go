@@ -12,7 +12,7 @@ package com.today.roc.go.spring.aop.jdk;
  */
 public class JdkServiceImpl implements JdkService {
     @Override
-    public void test() {
-        System.out.println("test");
+    public void test(String a) {
+        System.out.println("test" +a);
     }
 }

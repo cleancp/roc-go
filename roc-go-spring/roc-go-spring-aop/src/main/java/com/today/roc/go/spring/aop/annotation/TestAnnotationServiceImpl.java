@@ -1,7 +1,6 @@
 package com.today.roc.go.spring.aop.annotation;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 
 /**
  * Software License Declaration.
@@ -28,21 +27,16 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @author zou.cp
  * @version 1.0
  * @Description
- * @createTime 2020年08月13日 17:33*
+ * @createTime 2020年08月13日 17:31*
  * log.info()
  */
-public class TestAspectJMain {
+@Component
+public class TestAnnotationServiceImpl implements TestAnnotationService{
 
-    public static void main(String[] args) {
-        ApplicationContext context = new ClassPathXmlApplicationContext("aop.xml");
-        String[] beanDefinitionNames = context.getBeanDefinitionNames();
-        for (String beanDefinitionName : beanDefinitionNames) {
-            System.out.println(beanDefinitionName);
-        }
-        TestAnnotationService testAnnotation = (TestAnnotationService) context.getBean("testAnnotationServiceImpl");
-        testAnnotation.testAnnotation();
-
-//        Object bean = context.getBean("org.springframework.aop.config.internalAutoProxyCreator");
-//        System.out.println(bean);
+    @TestAspectJ
+    @Override
+    public void testAnnotation(){
+        System.out.println(this.getClass().getSimpleName()+" 执行 testAnnotation ");
     }
+
 }

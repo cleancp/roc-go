@@ -30,12 +30,8 @@ import org.springframework.stereotype.Component;
  * @createTime 2020年08月13日 17:31*
  * log.info()
  */
-@Component
-public class TestAnnotationBean {
+public interface TestAnnotationService {
 
-    @TestAspectJ
-    public void testAnnotation(){
-        System.out.println(this.getClass().getSimpleName()+" 执行 testAnnotation ");
-    }
+    public void testAnnotation();
 
 }

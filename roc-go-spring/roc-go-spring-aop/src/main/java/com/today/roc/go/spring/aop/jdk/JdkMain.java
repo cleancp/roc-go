@@ -17,6 +17,6 @@ public class JdkMain {
         JdkService jdkService = new JdkServiceImpl();
         JdkInvocationHandler invocationHandler = new JdkInvocationHandler(jdkService);
         JdkService proxy = (JdkService)invocationHandler.getProxy();
-        proxy.test();
+        proxy.test("1");
     }
 }

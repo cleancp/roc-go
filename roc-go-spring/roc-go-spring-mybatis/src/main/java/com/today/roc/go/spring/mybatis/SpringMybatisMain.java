@@ -5,6 +5,7 @@ import com.today.roc.go.spring.mybatis.model.RocUser;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,6 +41,11 @@ public class SpringMybatisMain {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring-mybatis.xml");
         RocUserMapper rocUserMapper = (RocUserMapper)context.getBean("rocUserMapper");
+        RocUser rocUser = new RocUser();
+        rocUser.setBirthday(new Date());
+        rocUser.setName("李四");
+        rocUser.setNamePinyin("ls");
+        rocUserMapper.insert(rocUser);
         List<RocUser> users = rocUserMapper.selectByExample(null);
         System.out.println(users);
     }

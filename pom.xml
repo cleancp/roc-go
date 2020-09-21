@@ -17,6 +17,7 @@
         <module>roc-go-dal</module>
         <module>roc-go-base</module>
         <module>roc-go-spring</module>
+        <module>roc-go-understand</module>
     </modules>
 
     <properties>

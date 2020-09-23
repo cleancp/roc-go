@@ -1,5 +1,11 @@
 package com.today.roc.go.understand.hashmap;
 
+import org.checkerframework.checker.units.qual.K;
+
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
  * Software License Declaration.
  * <p>
@@ -44,6 +50,38 @@ public class ConcurrentHashMapMain {
      */
 
     public static void main(String[] args) {
+
+        HashMap hashMap = new HashMap();
+        ConcurrentHashMap concurrentHashMap = new ConcurrentHashMap();
+        /**
+         * initTable方法
+         * if ((sc = sizeCtl) < 0)
+         * Thread.yield(); // lost initialization race; just spin  如果<0 那么值就是-1 ，此时该线程让出CPU时间片
+         * U.compareAndSwapInt(this, SIZECTL, sc, -1)  获取this对象在SIZECTL的offset值，与sc比较，如果相等设置SIZECTL的offset值为-1 ，并返回true，如果不等返回false不设值
+         */
+        Hashtable hashtable = new Hashtable();
+
+        /**
+         * HashMap Hashtable ConcurrentHashMap 区别？
+         * HashMap 允许空key 空value ，Hashtable ConcurrentHashMap key ,value 都不可空
+         * HashMap是非线程安全 ， Hashtable ConcurrentHashMap线程安全
+         * Hashtable 继承 Dictionary ，HashMap 继承AbstractMap 实现Map , ConcurrentHashMap  继承AbstractMap(实现Map) 实现ConcurrentMap(实现Map) ，之前认为有用，后面官方发声说没用
+         *
+         * 1.7与1.8区别
+         * HashMap：
+         *      结构：1.7 数组+链表  1.8 数组+链表+红黑树
+         *      操作：1.7key的hash算法与1.8不同，扩容的数据迁移方式不一样，1.7尾插入会造成循环链表 1.8是头插入，且增加红黑树之后，多了树化阈值=8与退树化阈值6
+         *
+         * ConcurrentHashMap：
+         *      结构：1.7 Segment+数组+链表  1.8 数组+链表+红黑树
+         *      操作：锁粒度不一样 1.7使用的分段锁，1.8使用CAS + synchronized，锁的是头节点
+         */
+        String [] strings = new String[]{"1","2","3"};
+        //死循环 break跳出
+        for (String[] tab = strings;;) {
+            System.out.println(tab);
+            break;
+        }
 
     }
 

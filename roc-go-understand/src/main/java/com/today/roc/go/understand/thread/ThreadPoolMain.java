@@ -36,6 +36,16 @@ import java.util.concurrent.*;
 public class ThreadPoolMain {
 
 
+    static class CallableThread implements Callable {
+
+        @Override
+        public Object call() throws Exception {
+            TimeUnit.SECONDS.sleep(5);
+            System.out.println("exec call");
+            return 100;
+        }
+    }
+
     static class NewThread implements Runnable {
         @Override
         public void run() {
@@ -150,12 +160,32 @@ public class ThreadPoolMain {
         //后台线程
         //daemonThreadTest();
         //线程join 其它线程中间插入，导致当前线程停止，等插入线程执行完当前线程才执行
-        joinThreadTest();
+        //joinThreadTest();
+        //Callable call方法调用
+        //callableTest();
 
     }
 
     /**
-     *
+     * Callable 执行call方法返回数据
+     */
+    private static void callableTest() {
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        Future future = executorService.submit(new CallableThread());
+        try {
+            Object o = future.get();
+            System.out.println(o);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    /**
+     * join插队
      */
     private static void joinThreadTest() {
         Thread t1 = new Thread(new JoinThread());

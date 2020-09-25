@@ -42,9 +42,24 @@ public class ThreadPoolMain {
             try {
                 System.out.println(Thread.currentThread().getName() + "exec");
                 TimeUnit.SECONDS.sleep(5);
-                System.out.println(Thread.currentThread().getName() + DateUtil.getDate(new Date(), DateUtil.DATE_TIME));
+                System.out.println(Thread.currentThread().getName() + " " + DateUtil.getDate(new Date(), DateUtil.DATE_TIME));
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            }
+        }
+    }
+
+    static class JoinThread implements Runnable {
+        @Override
+        public void run() {
+            for (int i = 0; i < 5; i++) {
+                try {
+                    System.out.println(Thread.currentThread().getName() + "exec");
+                    TimeUnit.SECONDS.sleep(1);
+                    System.out.println(Thread.currentThread().getName() + " " + DateUtil.getDate(new Date(), DateUtil.DATE_TIME));
+                } catch (InterruptedException e) {
+                    System.out.println(Thread.currentThread() + e.getMessage());
+                }
             }
         }
     }
@@ -133,7 +148,32 @@ public class ThreadPoolMain {
         //线程异常捕获
         //catchThreadException();
         //后台线程
-        daemonThreadTest();
+        //daemonThreadTest();
+        //线程join 其它线程中间插入，导致当前线程停止，等插入线程执行完当前线程才执行
+        joinThreadTest();
+
+    }
+
+    /**
+     *
+     */
+    private static void joinThreadTest() {
+        Thread t1 = new Thread(new JoinThread());
+        Thread t2 = new Thread(new JoinThread());
+        Thread t3 = new Thread(new JoinThread());
+        try {
+            /**
+             join的意思是使得放弃当前线程的执行，并返回对应的线程，例如下面代码的意思就是：
+             程序在main线程中调用t1线程的join方法，则main线程放弃cpu控制权，并返回t1线程继续执行直到线程t1执行完毕
+             所以结果是t1线程执行完后，才到主线程执行，相当于在main线程中同步t1线程，t1执行完了，main线程才有执行的机会
+             */
+            t1.start();
+            t1.join();
+            t2.start();
+            t3.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private static void daemonThreadTest() {

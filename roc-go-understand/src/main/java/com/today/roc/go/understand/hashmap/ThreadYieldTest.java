@@ -33,6 +33,8 @@ public class ThreadYieldTest extends Thread{
      * Thread.yield()方法
      * 并发时，当前线程执行到该处，会让出时间片，然后重新处于就绪状态，
      * 可能下一次还是该线程抢到时间片，可能不是该线程
+     *
+     * 有一个很重要的点就是，Thread.yield() 是建议执行切换CPU，而不是强制执行CPU切换。
      */
     public static void main(String[] args) {
         ThreadYieldTest t1 = new ThreadYieldTest();

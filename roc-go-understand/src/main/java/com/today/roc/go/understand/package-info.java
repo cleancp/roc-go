@@ -41,7 +41,6 @@ package com.today.roc.go.understand;
 
  回调地狱：设计许多嵌套回调处理程序的代码。回调地狱很难追踪 debug。
 
-
  Java 中，创建线程的方式主要有三种
  通过继承 Thread 类来创建线程
  通过实现 Runnable 接口来创建线程
@@ -49,10 +48,37 @@ package com.today.roc.go.understand;
 
 
 
+ 池化技术的思想：通过预先创建好多个线程，放在池中，这样可以在需要使用线程的时候直接获取，避免多次重复创建、销毁带来的开销
+
+ * long corePoolSize：核心线程数，线程池活跃的最小线程数(即使是空闲状态)， 如果设置了allowCoreThreadTimeOut，则会超时销毁
+ * long maximumPoolSize：线程池最大线程数 Integer.MAX_VALUE
+ * long keepAliveTime：当线程数大于核心数时，这是多余的空闲线程在终止之前等待新任务的最长时间（实际应用都会转为纳秒）
+ * TimeUnit unit：keepAliveTime的单位
+ * BlockingQueue<Runnable> workQueue：在执行任务之前用于保留任务的队列。该队列将仅保存由{@code execute}方法提交的{@code Runnable} 任务。
+ * 队列分类：
+ * 直接提交队列、SynchronousQueue，提交的任务不会被缓存，而是直接执行，若用于执行任务的线程数量大于maximumPoolSize，执行拒绝策略。适合已经准确知道并发量的业务使用。
+ * 有界任务队列、ArrayBlockingQueue，提交的任务小于corePoolSize，则会继续创建线程直到大于corePoolSize，大于corePoolSize会放到等待队列中，直到超过等待队列的容量，
+ *              新任务将会继续创建线程，直到大于maximumPoolSize，执行拒绝策略。
+ *              线程数量的上限与有界任务队列的状态有直接关系，如果任务数量小于小于等待队列容量或者任务队列容量很大，那线程数量上限小于corePoolSize,反之当等待队列满时，
+ *              以maximumPoolSize为线程数量上限
+ * 无界任务队列、LinkedBlockingQueue，使用无界队列，如果任务数小于corePoolSize，则会继续创建线程直到等于corePoolSize，大于corePoolSize队列会一直增加任务，
+ *              线程数量上限为corePoolSize，此时maximumPoolSize参数无效，业务上使用无界队列需要注意，如果任务数一直增长，而任务执行慢，长时间可能导致太多任务占满资源
+ * 优先任务队列、PriorityBlockingQueue，特殊的无界队列，会按照优先级高低执行
+ * ThreadFactory：线程工厂，定义线程属性
+ * Handler：拒绝策略，当新线程过来超过线程池容量，会执行拒绝策略
+ * 策略分类：
+ *
 
 
+ 通过对ctl的运算，能够得到两个重要的变量，workerCount(worker线程数量)和runState(线程池运行状态)。
 
-
+ 线程池运行状态
+ RUNNING:  接收新任务并且执行队列任务
+ SHUTDOWN: 不接收新任务但是执行队列任务
+ STOP: 不接收新任务不执行队列任务 ,并且中断进行中的任务
+ TIDYING: 所有任务都已被终止, 线程数为0,
+ 线程转换为状态TIDYING时将执行terminated()钩子方法( 自定义实现)
+ TERMINATED: terminated()已经执行完成
 
 
 

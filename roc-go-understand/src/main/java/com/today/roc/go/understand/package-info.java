@@ -67,7 +67,10 @@ package com.today.roc.go.understand;
  * ThreadFactory：线程工厂，定义线程属性
  * Handler：拒绝策略，当新线程过来超过线程池容量，会执行拒绝策略
  * 策略分类：
- *
+ * ThreadPoolExecutor.AbortPolicy：直接抛出异常，显示被拒绝线程信息以及线程池配置
+ * ThreadPoolExecutor.CallerRunsPolicy：把任务给调用者线程执行
+ * ThreadPoolExecutor.DiscardOldestPolicy：丢弃最早加入队列的任务，重新提交当前任务
+ * ThreadPoolExecutor.DiscardPolicy：不做任何处理，丢弃任务
 
 
  通过对ctl的运算，能够得到两个重要的变量，workerCount(worker线程数量)和runState(线程池运行状态)。

@@ -40,7 +40,7 @@ public class QueueServiceImpl implements QueueService {
         ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(1, 2, 1, TimeUnit.SECONDS,
                 new SynchronousQueue<>(), rejectedExecutionHandler);
         for (int i = 0; i < 6; i++) {
-            QueueThread queueThread = new QueueThread(1, TimeUnit.SECONDS);
+            QueueThread queueThread = new QueueThread(1, TimeUnit.SECONDS,0);
             poolExecutor.execute(queueThread);
         }
     }
@@ -70,11 +70,16 @@ public class QueueServiceImpl implements QueueService {
             ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(1, 2, 1, TimeUnit.SECONDS,
                     queue, rejectedExecutionHandler);
             for (int i = 0; i < 6; i++) {
-                if (i<2){
+                /*if (i<2){
                     poolExecutor.execute(new QueueThread());
                 }else {
                     poolExecutor.execute(queueThread);
-                }
+                }*/
+                QueueThread thread = new QueueThread();
+                thread.setPriority(i);
+                thread.setSleepTime(queueThread.getSleepTime());
+                thread.setUnit(queueThread.getUnit());
+                poolExecutor.execute(thread);
             }
         }
     }

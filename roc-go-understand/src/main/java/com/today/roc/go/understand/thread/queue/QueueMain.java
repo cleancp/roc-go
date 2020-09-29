@@ -36,10 +36,17 @@ import java.util.concurrent.*;
 public class QueueMain {
 
     public static void main(String[] args) {
-        //直接提交队列
+
         QueueService service = new QueueServiceImpl();
-        QueueThread queueThread = new QueueThread(1, TimeUnit.SECONDS);
-        execDiffQueueDiffPolicy(service, new SynchronousQueue(), queueThread, 5);
+        QueueThread queueThread = new QueueThread(1, TimeUnit.SECONDS, 0);
+        //直接提交队列
+        //execDiffQueueDiffPolicy(service, new SynchronousQueue(), queueThread, 5);
+        //有界任务队列
+        //execDiffQueueDiffPolicy(service, new ArrayBlockingQueue(2), queueThread, 5);
+        //无界任务队列
+        //execDiffQueueDiffPolicy(service, new LinkedBlockingQueue(), queueThread, 1,2,3,4,5);
+        //优先任务队列
+        execDiffQueueDiffPolicy(service, new PriorityBlockingQueue(), queueThread, 5);
     }
 
     public static void execDiffQueueDiffPolicy(QueueService service, BlockingQueue queue, QueueThread queueThread, int... indexs) {

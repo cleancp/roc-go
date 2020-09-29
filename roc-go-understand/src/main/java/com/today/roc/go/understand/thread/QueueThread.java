@@ -38,10 +38,11 @@ import java.util.concurrent.TimeUnit;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class QueueThread implements Runnable {
+public class QueueThread implements Runnable, Comparable<QueueThread> {
 
     private int      sleepTime;
     private TimeUnit unit;
+    private int      priority;
 
     @Override
     public void run() {
@@ -49,11 +50,16 @@ public class QueueThread implements Runnable {
         if (sleepTime > 0 && Objects.nonNull(unit)) {
             try {
                 unit.sleep(sleepTime);
-                System.out.println(name + " sleep");
+                System.out.println(name + " sleep " + this.priority);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        System.out.println(name + " exec ");
+        System.out.println(name + " exec " + this.priority);
+    }
+
+    @Override
+    public int compareTo(QueueThread o) {
+        return this.getPriority() > o.getPriority() ? -1 : 1;
     }
 }

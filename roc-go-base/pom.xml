@@ -24,7 +24,7 @@
         <commons-lang3_version>3.6</commons-lang3_version>
         <google-collections.version>1.0</google-collections.version>
         <commons-httpclient.version>3.1</commons-httpclient.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <httpclient.version>4.5.3</httpclient.version>
         <jdom.version>2.0.2</jdom.version>
         <commons_io_version>2.5</commons_io_version>

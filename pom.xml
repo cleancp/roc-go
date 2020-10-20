@@ -18,6 +18,7 @@
         <module>roc-go-base</module>
         <module>roc-go-spring</module>
         <module>roc-go-understand</module>
+        <module>roc-go-verify</module>
     </modules>
 
     <properties>

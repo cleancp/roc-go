@@ -1,10 +1,19 @@
 package com.today.roc.go.verify;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.today.roc.go.common.utils.date.DateUtil;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 
 /**
  * Software License Declaration.
@@ -37,7 +46,29 @@ import java.util.stream.Collectors;
 public class Main {
 
     public static void main(String[] args) {
-        test001();
+
+        BigDecimal divide = BigDecimal.valueOf(134).divide(BigDecimal.valueOf(3600), 2, RoundingMode.HALF_UP);
+        System.out.println(divide.doubleValue());
+        DecimalFormat decimalFormat = new DecimalFormat("#0.00");
+        System.out.println(decimalFormat.format(divide.doubleValue()));
+
+        //test20201021();
+        //test001();
+    }
+
+    private static void test20201021() {
+        Date date1 = DateUtil.parseDate("202009", DateUtil.DATE_MOTH);
+        System.out.println(date1);
+        Date date2 = DateUtil.parseDate("20200900",DateUtil.DATE);
+        System.out.println(date2);
+
+        long l1 = Double.valueOf("22.0").longValue();
+        System.out.println(l1);
+        List<Integer> list = Lists.newArrayList(1,2,4,8,3,0,9);
+        System.out.println(list);
+        List<Integer> collect = list.stream().sorted(Comparator.comparing(a -> a)).collect(Collectors.toList());
+        System.out.println(list);
+        System.out.println(collect);
     }
 
     private static void test001() {

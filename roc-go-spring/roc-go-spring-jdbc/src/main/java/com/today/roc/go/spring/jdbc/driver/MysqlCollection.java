@@ -46,6 +46,7 @@ public class MysqlCollection {
 //            System.out.println(i);
             ResultSet resultSet = statement.executeQuery("SELECT * from cgb_stock_back_statistics ");
             System.out.println(resultSet.getString("compose_key"));
+            resultSet.close();
         }catch (Exception e){
             throw e;
         }finally {

@@ -13,10 +13,15 @@ package com.today.roc.go.spring.aop.jdk;
 public class JdkMain {
 
     public static void main(String[] args) {
-        System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles","true");
+        System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles", "true");
         JdkService jdkService = new JdkServiceImpl();
         JdkInvocationHandler invocationHandler = new JdkInvocationHandler(jdkService);
-        JdkService proxy = (JdkService)invocationHandler.getProxy();
+        JdkService proxy = (JdkService) invocationHandler.getProxy();
         proxy.test("1");
+
+        JdkServiceTwo serviceTwo = new JdkServiceImpl();
+        JdkInvocationHandler invocationHandlerTwo = new JdkInvocationHandler(serviceTwo);
+        JdkServiceTwo twoProxy = (JdkServiceTwo) invocationHandlerTwo.getProxy();
+        twoProxy.testTwo();
     }
 }

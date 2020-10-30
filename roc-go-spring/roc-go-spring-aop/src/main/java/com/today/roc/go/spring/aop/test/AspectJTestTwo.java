@@ -18,7 +18,7 @@
 //@Component
 //public class AspectJTestTwo {
 //
-//    @Pointcut("@annotation(com.today.roc.go.spring.aop.annotation.TestAspectJ)")
+//    @Pointcut("@annotation(com.today.roc.go.spring.aop.annotation.AspectJAnnotation)")
 //    public void test() {
 //
 //    }

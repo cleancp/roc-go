@@ -1,9 +1,4 @@
-package com.today.roc.go.spring.aop.annotation;
-
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+package com.today.roc.go.spring.aop.jdk;
 
 /**
  * Software License Declaration.
@@ -30,13 +25,11 @@ import java.lang.annotation.Target;
  * @author zou.cp
  * @version 1.0
  * @Description
- * @createTime 2020年08月13日 17:24*
+ * @createTime 2020年10月30日 11:15*
  * log.info()
  */
+public interface JdkServiceTwo {
 
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD})
-public @interface TestAspectJ {
-
+    void testTwo();
 
 }

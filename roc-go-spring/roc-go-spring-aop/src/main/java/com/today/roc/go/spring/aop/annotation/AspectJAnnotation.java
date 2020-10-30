@@ -1,6 +1,9 @@
 package com.today.roc.go.spring.aop.annotation;
 
-import org.springframework.stereotype.Component;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * Software License Declaration.
@@ -27,17 +30,13 @@ import org.springframework.stereotype.Component;
  * @author zou.cp
  * @version 1.0
  * @Description
- * @createTime 2020年08月13日 17:31*
+ * @createTime 2020年08月13日 17:24*
  * log.info()
  */
-@Component
-public class TestAnnotationServiceImpl implements TestAnnotationService{
 
-    @AspectJAnnotation
-    @AspectJTwoAnnotation
-    @Override
-    public void testAnnotation(){
-        System.out.println(this.getClass().getSimpleName()+" 执行 testAnnotation ");
-    }
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.METHOD})
+public @interface AspectJAnnotation {
+
 
 }

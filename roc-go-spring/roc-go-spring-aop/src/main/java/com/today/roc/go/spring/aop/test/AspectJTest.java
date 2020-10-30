@@ -19,14 +19,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class AspectJTest {
 
-    @Pointcut("@annotation(com.today.roc.go.spring.aop.annotation.TestAspectJ)")
+    @Pointcut("@annotation(com.today.roc.go.spring.aop.annotation.AspectJAnnotation)")
     public void test() {
-
     }
 
 //    @Pointcut("execution(* *.test(..))")
 //    public void test() {
-//
 //    }
 
     @Before("test()")
@@ -62,5 +60,9 @@ public class AspectJTest {
     @AfterThrowing(pointcut = "test()", throwing = "e")
     public void afterThrowing(Throwable e) {
         System.out.println(e.getMessage());
+    }
+
+    public void noAnnotation(){
+        System.out.println("没有注解的普通方法");
     }
 }

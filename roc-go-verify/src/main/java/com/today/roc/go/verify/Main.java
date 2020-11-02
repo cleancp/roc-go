@@ -7,10 +7,7 @@ import com.today.roc.go.common.utils.date.DateUtil;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
@@ -46,16 +43,86 @@ import java.util.stream.LongStream;
 public class Main {
 
     public static void main(String[] args) {
-
-        BigDecimal divide = BigDecimal.valueOf(134).divide(BigDecimal.valueOf(3600), 2, RoundingMode.HALF_UP);
-        System.out.println(divide.doubleValue());
-        DecimalFormat decimalFormat = new DecimalFormat("#0.00");
-        System.out.println(decimalFormat.format(divide.doubleValue()));
-
+        testListToArray();
+        //testDate();
+        //testDoubleFormat();
         //test20201021();
         //test001();
     }
 
+    /**
+     * List集合转数组，只取集合最后的一个位置数据
+     */
+    private static void testListToArray() {
+        List<Integer> list = Lists.newArrayList(1,2,3);
+        Integer[] integers = list.toArray(new Integer[1]);
+        for (Integer integer : integers) {
+            System.out.println(integer);
+        }
+    }
+
+    /**
+     * 一年时间判断
+     */
+    private static void testDate() {
+        Date start = new Date(getMonthFirstTime(1999, 1));
+        Date end = new Date(getMonthLastTime(1999, 12));
+        System.out.println(DateUtil.getDate(start,DateUtil.DATE_TIME));
+        System.out.println(DateUtil.getDate(end,DateUtil.DATE_TIME));
+        //阳历一年365/366天
+        Date addDate = DateUtil.addDate(start, 366);
+        System.out.println("加一年："+DateUtil.getDate(addDate,DateUtil.DATE_TIME));
+        if (addDate.compareTo(end)<0){
+            System.out.println("时间范围请选择一年时间内");
+        }
+    }
+
+    /**
+     * BigDecimal转Double,Double格式化
+     */
+    private static void testDoubleFormat() {
+        BigDecimal divide = BigDecimal.valueOf(134).divide(BigDecimal.valueOf(3600), 2, RoundingMode.HALF_UP);
+        System.out.println(divide.doubleValue());
+        DecimalFormat decimalFormat = new DecimalFormat("#0.00");
+        System.out.println(decimalFormat.format(divide.doubleValue()));
+    }
+
+    /**
+     * 获取某年某月第一天时间戳
+     *
+     * @param year 年份
+     * @return Date
+     */
+    public static Long getMonthFirstTime(int year, int month) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.clear();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month-1);
+        return calendar.getTimeInMillis();
+    }
+
+    /**
+     * 获取某年某月最后一天时间戳
+     *
+     * @param year 年份
+     * @return Date
+     */
+    public static Long getMonthLastTime(int year, int month) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.clear();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month-1);
+        calendar.roll(Calendar.DAY_OF_MONTH, -1);
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
+        calendar.set(Calendar.MILLISECOND, 999);
+        return calendar.getTimeInMillis();
+    }
+
+    /**
+     * 时间格式化+排序
+     */
     private static void test20201021() {
         Date date1 = DateUtil.parseDate("202009", DateUtil.DATE_MOTH);
         System.out.println(date1);
@@ -71,6 +138,9 @@ public class Main {
         System.out.println(collect);
     }
 
+    /**
+     * 判断是否有交集
+     */
     private static void test001() {
         Set<Long> set1 = Sets.newHashSet();
         Set<Long> set2 = Sets.newHashSet();

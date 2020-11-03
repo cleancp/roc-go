@@ -34,4 +34,5 @@ public interface TestAnnotationService {
 
     public void testAnnotation();
 
+    String testAnnotationTwo();
 }

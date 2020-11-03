@@ -35,12 +35,14 @@ public class TestAspectJMain {
 
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("aop.xml");
-        String[] beanDefinitionNames = context.getBeanDefinitionNames();
-        for (String beanDefinitionName : beanDefinitionNames) {
-            System.out.println(beanDefinitionName);
-        }
+//        String[] beanDefinitionNames = context.getBeanDefinitionNames();
+//        for (String beanDefinitionName : beanDefinitionNames) {
+//            System.out.println(beanDefinitionName);
+//        }
         TestAnnotationService testAnnotation = (TestAnnotationService) context.getBean("testAnnotationServiceImpl");
         testAnnotation.testAnnotation();
+//        System.out.println("-------------------------------------------------");
+        //testAnnotation.testAnnotationTwo();
 
 //        Object bean = context.getBean("org.springframework.aop.config.internalAutoProxyCreator");
 //        System.out.println(bean);

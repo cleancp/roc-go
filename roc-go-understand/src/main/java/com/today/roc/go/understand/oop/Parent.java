@@ -1,6 +1,9 @@
-package com.today.roc.go.spring.aop.annotation;
+package com.today.roc.go.understand.oop;
 
-import org.springframework.stereotype.Component;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Software License Declaration.
@@ -27,23 +30,22 @@ import org.springframework.stereotype.Component;
  * @author zou.cp
  * @version 1.0
  * @Description
- * @createTime 2020年08月13日 17:31*
+ * @createTime 2020年11月04日 16:31*
  * log.info()
  */
-@Component
-public class TestAnnotationServiceImpl implements TestAnnotationService {
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class Parent {
 
-    @AspectJAnnotation
-    //@AspectJTwoAnnotation
-    @Override
-    public void testAnnotation() {
-        System.out.println(this.getClass().getSimpleName() + " 执行 testAnnotation ");
-    }
+    @Builder.Default
+    private String  name = "李四";
+    @Builder.Default
+    private Integer age  = 40;
 
-    @AspectJAnnotation
-    @Override
-    public String testAnnotationTwo() {
-        System.out.println(this.getClass().getSimpleName() + " 执行 testAnnotationTwo ");
-        return "hello";
+    public void test() {
+        System.out.println("parent test");
+        System.out.println(this.getClass().getName());
     }
 }

@@ -91,7 +91,12 @@ public class TestInner {
         mi.test();
     }
 
-
+    /**
+     * 匿名内部类
+     */
+    public abstract class AbstractInner{
+        public abstract void test();
+    }
 
     public static void main(String[] args) {
         TestInner testInner = new TestInner();
@@ -104,5 +109,18 @@ public class TestInner {
         sInner.test();
 
         testInner.show();
+
+        //匿名内部类
+        testInner.noNameInner();
+    }
+
+    private void noNameInner() {
+        AbstractInner abstractInner = new AbstractInner() {
+            @Override
+            public void test() {
+                System.out.println("匿名内部类");
+            }
+        };
+        abstractInner.test();
     }
 }

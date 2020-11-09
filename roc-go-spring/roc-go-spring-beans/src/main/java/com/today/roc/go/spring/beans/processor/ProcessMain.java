@@ -1,5 +1,7 @@
 package com.today.roc.go.spring.beans.processor;
 
+import com.today.roc.go.spring.beans.bean.DependsController;
+import com.today.roc.go.spring.beans.bean.DependsService;
 import com.today.roc.go.spring.beans.bean.SensitiveWordBean;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -21,13 +23,19 @@ public class ProcessMain {
 
     public static void testBeanFactoryProcess(){
         ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("processTest.xml");
-        String[] beanDefinitionNames = ac.getBeanDefinitionNames();
-        for (String beanDefinitionName : beanDefinitionNames) {
-            System.out.println(beanDefinitionName);
-        }
-        System.out.println("===============================");
-        //
-        SensitiveWordBean sensitiveWordBean = (SensitiveWordBean) ac.getBean("sensitiveWordBean");
-        System.out.println(sensitiveWordBean);
+//        String[] beanDefinitionNames = ac.getBeanDefinitionNames();
+//        for (String beanDefinitionName : beanDefinitionNames) {
+//            System.out.println(beanDefinitionName);
+//        }
+//        System.out.println("===============================");
+//        //
+//        SensitiveWordBean sensitiveWordBean = (SensitiveWordBean) ac.getBean("sensitiveWordBean");
+//        System.out.println(sensitiveWordBean);
+
+        DependsController dependsController = (DependsController) ac.getBean("dependsController");
+        dependsController.test();
+
+        DependsService dependsService = (DependsService) ac.getBean("dependsService");
+        dependsService.test();
     }
 }

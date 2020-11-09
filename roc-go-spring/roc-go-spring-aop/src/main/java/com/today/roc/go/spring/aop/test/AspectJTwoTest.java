@@ -18,13 +18,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class AspectJTwoTest {
 
-//    @Pointcut("@annotation(com.today.roc.go.spring.aop.annotation.AspectJTwoAnnotation)")
-//    public void testTwo() {
-//    }
-
-    @Pointcut("execution(* *.testAnnotation(..))")
+    @Pointcut("@annotation(com.today.roc.go.spring.aop.annotation.AspectJTwoAnnotation)")
     public void testTwo() {
     }
+
+//    @Pointcut("execution(* *.testAnnotation(..))")
+//    public void testTwo() {
+//    }
 
     @Before("testTwo()")
     public void beforeTwoTest() {

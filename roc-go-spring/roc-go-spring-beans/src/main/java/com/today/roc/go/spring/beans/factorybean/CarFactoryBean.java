@@ -2,6 +2,7 @@ package com.today.roc.go.spring.beans.factorybean;
 
 import lombok.Data;
 import org.springframework.beans.factory.FactoryBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -20,6 +21,9 @@ import java.math.BigDecimal;
 @Component
 @Data
 public class CarFactoryBean implements FactoryBean<Car> {
+
+    @Autowired
+    Car car;
 
     @Value("本田,SUV,1000000.12")
     private String carInfo = "本田,SUV,1000000.12";

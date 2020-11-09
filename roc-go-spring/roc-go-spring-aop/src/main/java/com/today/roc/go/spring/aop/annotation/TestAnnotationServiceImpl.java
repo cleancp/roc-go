@@ -31,13 +31,19 @@ import org.springframework.stereotype.Component;
  * log.info()
  */
 @Component
-public class TestAnnotationServiceImpl implements TestAnnotationService{
+public class TestAnnotationServiceImpl implements TestAnnotationService {
 
     @AspectJAnnotation
-    @AspectJTwoAnnotation
+    //@AspectJTwoAnnotation
     @Override
-    public void testAnnotation(){
-        System.out.println(this.getClass().getSimpleName()+" 执行 testAnnotation ");
+    public void testAnnotation() {
+        System.out.println(this.getClass().getSimpleName() + " 执行 testAnnotation ");
     }
 
+    @AspectJAnnotation
+    @Override
+    public String testAnnotationTwo() {
+        System.out.println(this.getClass().getSimpleName() + " 执行 testAnnotationTwo ");
+        return "hello";
+    }
 }

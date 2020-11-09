@@ -1,6 +1,4 @@
-package com.today.roc.go.spring.aop.annotation;
-
-import org.springframework.stereotype.Component;
+package com.today.roc.go.understand.trywithresource;
 
 /**
  * Software License Declaration.
@@ -27,12 +25,12 @@ import org.springframework.stereotype.Component;
  * @author zou.cp
  * @version 1.0
  * @Description
- * @createTime 2020年08月13日 17:31*
+ * @createTime 2020年11月05日 11:50*
  * log.info()
  */
-public interface TestAnnotationService {
-
-    public void testAnnotation();
-
-    String testAnnotationTwo();
+public class AutoCloseableImpl implements AutoCloseable {
+    @Override
+    public void close() throws Exception {
+        System.out.println("自动关闭");
+    }
 }

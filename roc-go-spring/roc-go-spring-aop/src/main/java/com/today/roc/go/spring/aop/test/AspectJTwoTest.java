@@ -2,6 +2,7 @@ package com.today.roc.go.spring.aop.test;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Component;
  * log.info()
  */
 @Aspect
+@Order(2)
 @Component
 public class AspectJTwoTest {
 
@@ -37,14 +39,9 @@ public class AspectJTwoTest {
     }
 
     @Around("testTwo()")
-    public Object aroundTwoTest(ProceedingJoinPoint joinPoint) {
+    public Object aroundTwoTest(ProceedingJoinPoint joinPoint) throws Throwable {
         System.out.println("aroundTwoTest before");
-        Object proceed = null;
-        try {
-            proceed = joinPoint.proceed();
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-        }
+        Object proceed = joinPoint.proceed();
         System.out.println("aroundTwoTest after");
         return proceed;
     }
@@ -58,10 +55,10 @@ public class AspectJTwoTest {
 
     @AfterThrowing(pointcut = "testTwo()", throwing = "e")
     public void afterTwoThrowing(Throwable e) {
-        System.out.println("afterTwoThrowing "+e.getMessage());
+        System.out.println("afterTwoThrowing " + e.getMessage());
     }
 
-    public void noTwoAnnotation(){
+    public void noTwoAnnotation() {
         System.out.println("没有注解的普通方法");
     }
 }

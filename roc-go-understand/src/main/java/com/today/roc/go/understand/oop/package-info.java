@@ -1,7 +1,3 @@
-package com.today.roc.go.spring.aop.annotation;
-
-import org.springframework.stereotype.Component;
-
 /**
  * Software License Declaration.
  * <p>
@@ -27,12 +23,20 @@ import org.springframework.stereotype.Component;
  * @author zou.cp
  * @version 1.0
  * @Description
- * @createTime 2020年08月13日 17:31*
+ * @createTime 2020年11月04日 17:25*
  * log.info()
  */
-public interface TestAnnotationService {
+package com.today.roc.go.understand.oop;
 
-    public void testAnnotation();
 
-    String testAnnotationTwo();
-}
+/**
+ * 成员内部类
+ * Java 编译器在创建内部类对象时，隐式的把其外部类对象的引用也传了进去并一直保存着。
+ * 这样就使得内部类对象始终可以访问其外部类对象，同时这也是为什么在外部 类作用范围之外向要创建内部类对象必须先创建其外部类对象的原因。
+ *
+ *
+ *
+ *
+ *
+ *
+ */

@@ -1,6 +1,4 @@
-package com.today.roc.go.spring.aop.annotation;
-
-import org.springframework.stereotype.Component;
+package com.today.roc.go.understand.oop;
 
 /**
  * Software License Declaration.
@@ -27,12 +25,20 @@ import org.springframework.stereotype.Component;
  * @author zou.cp
  * @version 1.0
  * @Description
- * @createTime 2020年08月13日 17:31*
+ * @createTime 2020年11月04日 16:47*
  * log.info()
  */
-public interface TestAnnotationService {
+public class OOPMain {
 
-    public void testAnnotation();
-
-    String testAnnotationTwo();
+    public static void main(String[] args) {
+        Parent parent = Parent.builder().build();
+        parent.test();
+        System.out.println(parent.toString());
+        System.out.println("===========================================");
+        Parent son = new Son();
+        son.test();
+        System.out.println(son.getAge());
+        Son.InnerSon innerSon = new Son.InnerSon();
+        System.out.println(innerSon.getName());
+    }
 }

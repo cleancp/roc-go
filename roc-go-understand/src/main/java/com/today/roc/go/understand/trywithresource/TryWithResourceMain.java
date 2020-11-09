@@ -1,6 +1,6 @@
-package com.today.roc.go.spring.aop.annotation;
+package com.today.roc.go.understand.trywithresource;
 
-import org.springframework.stereotype.Component;
+import java.io.FileOutputStream;
 
 /**
  * Software License Declaration.
@@ -27,12 +27,22 @@ import org.springframework.stereotype.Component;
  * @author zou.cp
  * @version 1.0
  * @Description
- * @createTime 2020年08月13日 17:31*
+ * @createTime 2020年11月05日 11:52*
  * log.info()
  */
-public interface TestAnnotationService {
+public class TryWithResourceMain {
 
-    public void testAnnotation();
+    public static void main(String[] args) {
 
-    String testAnnotationTwo();
+        try (
+                AutoCloseableImpl closeable = new AutoCloseableImpl()) {
+            System.out.println("trywithresource");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+//    public test
+
 }

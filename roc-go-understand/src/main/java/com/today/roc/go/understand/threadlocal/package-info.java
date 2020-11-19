@@ -38,7 +38,7 @@ package com.today.roc.go.understand.threadlocal;
  * 调用栈溢出/缓冲区溢出
  *
  * 2、ThreadLocal是什么？
- * ThreadLocal是线程变量，也就是说ThreadLocal创建的变量是属于当前线程的，因为线程间隔离，所以是线程私有的，
+ * ThreadLocal是线程变量，也就是说ThreadLocal创建的变量是属于当前线程的，因为线程间隔离，所以是线程私有的
  * ThreadLocal为变量在每个线程中创建了一个副本，线程可以访问自己的那个副本
  *
  * 3、主要用途？

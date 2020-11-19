@@ -3,6 +3,7 @@ package com.today.roc.go.verify;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.today.roc.go.common.utils.date.DateUtil;
+import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -10,6 +11,7 @@ import java.text.DecimalFormat;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
 /**
@@ -43,11 +45,116 @@ import java.util.stream.LongStream;
 public class Main {
 
     public static void main(String[] args) {
-        testListToArray();
+        String value = "123456789";
+        Main main = new Main();
+        String result = main.desensitization(true, "证件号", value);
+        System.out.println(result);
+        //testListToArray();
         //testDate();
         //testDoubleFormat();
         //test20201021();
         //test001();
+//        Date a = null;
+//        System.out.println(a.compareTo(new Date()) < 0);
+    }
+
+    public String desensitization(Boolean isFolderDesensitization, String fieldName , String fieldValue){
+        //字段名为空或值为空直接返回空字符串
+        if (StringUtils.isBlank(fieldName)||StringUtils.isBlank(fieldValue)){
+            return Optional.ofNullable(fieldValue).orElse("");
+        }
+        //不脱敏直接返回
+        if (!isFolderDesensitization){
+            return fieldValue;
+        }
+        int begin =0;
+        int length = fieldValue.length();
+        int end = length;
+        /**
+         * 客户号的值，后5位用#覆盖
+         * 账号的值，后5位用#覆盖
+         * 卡号的值，第5到第8位用#覆盖
+         * 证件号的值，第7到第10位用#覆盖
+         */
+        switch(fieldName){
+            case "客户号":
+                begin = length<5?0:length- 5;
+                break;
+            case "账号":
+                begin = length<5?0:length- 5;
+                break;
+            case "卡号":
+                begin = 4;
+                end = 8;
+                break;
+            case "证件号":
+                begin = 6;
+                end = 10;
+                break;
+            default:
+                return fieldValue;
+        }
+        fieldValue = dealReplace(fieldValue,begin,end,"#");
+        return fieldValue;
+    }
+
+    public String dealReplace(String fieldValue , int begin , int end , String sign){
+        StringBuffer value = new StringBuffer(fieldValue);
+        StringBuffer sb = new StringBuffer();
+        int length = fieldValue.length();
+        if (begin<0){
+            begin = 0;
+        }
+        if (length<begin){
+            return fieldValue;
+        }
+        if (length<end){
+            end = length;
+        }
+        IntStream.range(0,end-begin).forEach(
+                v->{
+                    sb.append(sign);
+                }
+        );
+        fieldValue = value.replace(begin, end, sb.toString()).toString();
+        return fieldValue;
+    }
+
+    public String replace(String fieldValue , int begin , int end , String sign){
+        StringBuffer value = new StringBuffer(fieldValue);
+
+        value.replace(begin,end,"#");
+
+        //如果5-8位 <5位 不替换
+        int length = fieldValue.length();
+        if (fieldValue.length() <= begin){
+            return fieldValue;
+        }
+        StringBuffer sb = new StringBuffer();
+        //6位 替换5-7位
+        if (length < end){
+            fieldValue = fieldValue.substring(begin, begin);
+            IntStream.range(begin,length).forEach(
+                    v->{
+                        sb.append(sign);
+                    }
+            );
+            fieldValue += sb.toString();
+        }else if (length == end){
+            //8位 替换5-8位
+            fieldValue = fieldValue.substring(begin, end);
+            IntStream.range(begin,end).forEach(
+                    v->{
+                        sb.append(sign);
+                    }
+            );
+            fieldValue += sb.toString();
+        }else {
+            //10位 替换5-8位
+
+        }
+
+        return fieldValue;
     }
 
     /**

@@ -1,5 +1,7 @@
 package com.today.roc.go.verify.sms;
 
+import com.google.common.collect.Lists;
+
 import javax.net.ssl.*;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -22,65 +24,47 @@ public class SendSms {
     /**
      * 发送营销短信接口(地址请写接口文档的地址)
      */
-    private static final String SEND_MARKETING_URL = "https://www.smsplatform.com/api/apiSms/sendMarketingSms";
+    private static final String SEND_MARKETING_URL = "https://www.sms.platform.com/api/apiSms/sendMarketingSms";
 
     /**
      * 发送催收短信接口(地址请写接口文档的地址)
      */
-    private static final String SEND_COLLECTION_URL = "https://www.smsplatform.com/api/apiSms/sendCollectionSms";
+    private static final String SEND_COLLECTION_URL = "https://www.sms.platform.com/api/apiSms/sendCollectionSms";
+
+    /**
+     * 发送提醒短信接口(地址请写接口文档的地址)
+     */
+    private static final String SEND_REMIND_URL = "https://www.sms.platform.com/api/apiSms/sendRemind";
 
     /**
      * 获取短信发送结果(地址请写接口文档的地址)
      */
-    private static final String SEND_RESULT_URL = "https://www.smsplatform.com/api/apiSms/getSmsSendResult";
+    private static final String SEND_RESULT_URL = "https://www.sms.platform.com/api/apiSms/getSmsSendResult";
 
 
     public static void main(String[] args) {
-        //发送营销短信
-        sendMarketingSms();
-        //发送催收短信
-//        sendCollection();
+        //发送提醒短信
+        sendRemind();
+        System.out.println("-----------------------------");
         //获取短信发送结果
         getSmsSendResult();
     }
 
-
     /**
-     * 发送营销短信
+     * 发送提醒短信
      */
-    private static void sendMarketingSms() {
+    private static void sendRemind() {
         //封装参数
         ApiCommonOpenDTO build = build();
-        //手机号
-        List<String> phones = new ArrayList<>();
-        phones.add("17603086701");
-        //对应接口文档中的 data 参数
-        ApiSmsSendMarketingSmsDTO data = ApiSmsSendMarketingSmsDTO.builder()
-                .sendContent("测试测试")
-                .phones(phones)
+        List<ApiSmsSendBaseDTO> details = Lists.newArrayList(ApiSmsSendBaseDTO.builder().phone("17603086701").sendContent("您的验证码是5214").build()) ;
+        ApiSmsSendRemindDTO data = ApiSmsSendRemindDTO.builder()
+                .signContent("【智灵时代】")
+                .details(details)
                 .build();
         build.setData(data);
         //发送请求
-        doPost(build, SEND_MARKETING_URL);
+        doPost(build, SEND_REMIND_URL);
     }
-
-
-    /**
-     * 发送催收短信
-     */
-    private static void sendCollection() {
-        //封装参数
-        ApiCommonOpenDTO build = build();
-        List<ApiSmsSendCollectionDTO> data = new ArrayList<>();
-        data.add(ApiSmsSendCollectionDTO.builder()
-                .phone("13788888888")
-                .sendContent("测试测试")
-                .build());
-        build.setData(data);
-        //发送请求
-        doPost(build, SEND_COLLECTION_URL);
-    }
-
 
     /**
      * 获取短信发送结果
@@ -88,7 +72,7 @@ public class SendSms {
     private static void getSmsSendResult() {
         //封装参数
         ApiCommonOpenDTO build = build();
-        build.setData("发送短信之后返回的值");
+        build.setData("liu123500000015");
         //发送请求
         doPost(build, SEND_RESULT_URL);
     }
@@ -100,8 +84,8 @@ public class SendSms {
      * @return ApiCommonOpenDTO
      */
     private static ApiCommonOpenDTO build() {
-        String accessKey = "liu1235";
-        String secretKey = "liu1235 ";
+        String accessKey = "zoucp";
+        String secretKey = "zoucp";
         //随机串
         String nonce = UUID.randomUUID().toString();
         //时间戳
@@ -193,6 +177,41 @@ public class SendSms {
         }
     }
 
+    /**
+     * 发送营销短信
+     */
+    private static void sendMarketingSms() {
+        //封装参数
+        ApiCommonOpenDTO build = build();
+        //手机号
+        List<String> phones = new ArrayList<>();
+        phones.add("17603086701");
+        //对应接口文档中的 data 参数
+        ApiSmsSendMarketingSmsDTO data = ApiSmsSendMarketingSmsDTO.builder()
+                .sendContent("测试测试")
+                .phones(phones)
+                .build();
+        build.setData(data);
+        //发送请求
+        doPost(build, SEND_MARKETING_URL);
+    }
+
+
+    /**
+     * 发送催收短信
+     */
+    private static void sendCollection() {
+        //封装参数
+        ApiCommonOpenDTO build = build();
+        List<ApiSmsSendCollectionDTO> data = new ArrayList<>();
+        data.add(ApiSmsSendCollectionDTO.builder()
+                .phone("13788888888")
+                .sendContent("测试测试")
+                .build());
+        build.setData(data);
+        //发送请求
+        doPost(build, SEND_COLLECTION_URL);
+    }
 }
     	
     	

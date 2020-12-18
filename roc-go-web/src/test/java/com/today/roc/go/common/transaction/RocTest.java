@@ -45,7 +45,7 @@ public class RocTest {
 
     @Test
     public void testTransaction() {
-        rocInfoService.saveRocInfo();
+        rocInfoService.saveRocInfo(4);
     }
 
 }

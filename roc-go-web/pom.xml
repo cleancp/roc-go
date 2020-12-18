@@ -35,6 +35,10 @@
             <groupId>com.today</groupId>
             <artifactId>roc-go-biz</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+        </dependency>
         <!--spring boot-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

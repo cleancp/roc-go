@@ -45,10 +45,17 @@ import java.util.stream.LongStream;
 public class Main {
 
     public static void main(String[] args) {
-        String value = "123456789";
-        Main main = new Main();
-        String result = main.desensitization(true, "证件号", value);
-        System.out.println(result);
+        Boolean a = new Boolean(true);
+        if (a){
+            System.out.println(2);
+        }
+        if (a.booleanValue()){
+            System.out.println(1);
+        }
+//        String value = "123456789";
+//        Main main = new Main();
+//        String result = main.desensitization(true, "证件号", value);
+//        System.out.println(result);
         //testListToArray();
         //testDate();
         //testDoubleFormat();

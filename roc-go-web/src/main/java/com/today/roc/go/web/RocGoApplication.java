@@ -1,12 +1,14 @@
 package com.today.roc.go.web;
 
 import lombok.extern.slf4j.Slf4j;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.util.Arrays;
 
@@ -21,7 +23,9 @@ import java.util.Arrays;
  * log.info()
  */
 @Slf4j
-@SpringBootApplication(scanBasePackages = "com.today.roc.go*", exclude = DataSourceAutoConfiguration.class)
+@SpringBootApplication(scanBasePackages = "com.today.roc.go*")
+@MapperScan(basePackages = "com.today.roc.go.dal.mapper")
+@EnableTransactionManagement
 public class RocGoApplication {
 
     public static void main(String[] args) {

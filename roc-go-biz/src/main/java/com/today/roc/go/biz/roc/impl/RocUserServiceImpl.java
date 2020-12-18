@@ -1,6 +1,12 @@
-package com.today.roc.go.dal.dao;
+package com.today.roc.go.biz.roc.impl;
 
+import com.today.roc.go.biz.roc.RocUserService;
+import com.today.roc.go.dal.dao.RocUserDao;
 import com.today.roc.go.dal.model.RocUser;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Software License Declaration.
@@ -27,9 +33,23 @@ import com.today.roc.go.dal.model.RocUser;
  * @author zou.cp
  * @version 1.0
  * @Description
- * @createTime 2020年12月18日 18:05*
+ * @createTime 2020年12月18日 18:12*
  * log.info()
  */
-public interface RocUserDao {
-    Boolean insert(RocUser rocUser);
+@Slf4j
+@Service
+public class RocUserServiceImpl implements RocUserService {
+
+    @Autowired
+    private RocUserDao rocUserDao;
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void saveRocUser(RocUser rocUser, int i) {
+        if (i == 3) {
+            int a = 1 / 0;
+        }
+        rocUserDao.insert(rocUser);
+    }
+
 }

@@ -1,7 +1,3 @@
-package com.today.roc.go.dal.dao;
-
-import com.today.roc.go.dal.model.RocUser;
-
 /**
  * Software License Declaration.
  * <p>
@@ -27,9 +23,7 @@ import com.today.roc.go.dal.model.RocUser;
  * @author zou.cp
  * @version 1.0
  * @Description
- * @createTime 2020年12月18日 18:05*
+ * @createTime 2020年12月18日 17:39*
  * log.info()
  */
-public interface RocUserDao {
-    Boolean insert(RocUser rocUser);
-}
+package com.today.roc.go.dal.model;

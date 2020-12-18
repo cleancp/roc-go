@@ -1,6 +1,13 @@
-package com.today.roc.go.dal.dao;
+package com.today.roc.go.dal.dao.impl;
 
+import com.today.roc.go.dal.dao.RocInfoDao;
+import com.today.roc.go.dal.dao.RocUserDao;
+import com.today.roc.go.dal.mapper.RocInfoMapper;
+import com.today.roc.go.dal.mapper.RocUserMapper;
+import com.today.roc.go.dal.model.RocInfo;
 import com.today.roc.go.dal.model.RocUser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 /**
  * Software License Declaration.
@@ -30,6 +37,15 @@ import com.today.roc.go.dal.model.RocUser;
  * @createTime 2020年12月18日 18:05*
  * log.info()
  */
-public interface RocUserDao {
-    Boolean insert(RocUser rocUser);
+@Repository
+public class RocInfoDaoImpl implements RocInfoDao {
+
+    @Autowired
+    private RocInfoMapper mapper;
+
+    @Override
+    public Boolean insert(RocInfo rocInfo) {
+        return mapper.insert(rocInfo) == 1;
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.today.roc.go.dal.dao;
 
+import com.today.roc.go.dal.model.RocInfo;
 import com.today.roc.go.dal.model.RocUser;
 
 /**
@@ -30,6 +31,6 @@ import com.today.roc.go.dal.model.RocUser;
  * @createTime 2020年12月18日 18:05*
  * log.info()
  */
-public interface RocUserDao {
-    Boolean insert(RocUser rocUser);
+public interface RocInfoDao {
+    Boolean insert(RocInfo rocInfo);
 }

@@ -1,6 +1,12 @@
-package com.today.roc.go.dal.dao;
+package com.today.roc.go.common.transaction;
 
-import com.today.roc.go.dal.model.RocUser;
+import com.today.roc.go.biz.roc.RocInfoService;
+import com.today.roc.go.web.RocGoApplication;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * Software License Declaration.
@@ -27,9 +33,19 @@ import com.today.roc.go.dal.model.RocUser;
  * @author zou.cp
  * @version 1.0
  * @Description
- * @createTime 2020年12月18日 18:05*
+ * @createTime 2020年12月18日 18:27*
  * log.info()
  */
-public interface RocUserDao {
-    Boolean insert(RocUser rocUser);
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = RocGoApplication.class)
+public class RocTest {
+
+    @Autowired
+    private RocInfoService rocInfoService;
+
+    @Test
+    public void testTransaction() {
+        rocInfoService.saveRocInfo();
+    }
+
 }

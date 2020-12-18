@@ -1,6 +1,6 @@
-package com.today.roc.go.dal.dao;
+package com.today.roc.go.biz.roc;
 
-import com.today.roc.go.dal.model.RocUser;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Software License Declaration.
@@ -27,9 +27,10 @@ import com.today.roc.go.dal.model.RocUser;
  * @author zou.cp
  * @version 1.0
  * @Description
- * @createTime 2020年12月18日 18:05*
+ * @createTime 2020年12月18日 18:12*
  * log.info()
  */
-public interface RocUserDao {
-    Boolean insert(RocUser rocUser);
+public interface RocInfoService {
+    @Transactional(rollbackFor = Exception.class)
+    void saveRocInfo();
 }

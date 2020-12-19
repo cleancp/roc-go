@@ -32,6 +32,6 @@ import org.springframework.transaction.annotation.Transactional;
  * log.info()
  */
 public interface RocUserService {
-    @Transactional(rollbackFor = Exception.class)
+
     void saveRocUser(RocUser rocUser, int i);
 }

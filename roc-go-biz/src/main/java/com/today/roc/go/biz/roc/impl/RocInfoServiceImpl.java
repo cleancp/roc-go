@@ -48,15 +48,17 @@ public class RocInfoServiceImpl implements RocInfoService {
     @Autowired
     private RocUserService rocUserService;
 
-    @Transactional(rollbackFor = Exception.class)
+    //@Transactional(rollbackFor = Exception.class)
     @Override
     public void saveRocInfo(int count) {
-        for (int i = 0; i < count; i++) {
-            for (int j = 0; j < 2; j++) {
+//        try {
+            for (int i = 0; i < count; i++) {
                 rocInfoDao.insert(buildInfo(i));
+                rocUserService.saveRocUser(buildUser(i), i);
             }
-            rocUserService.saveRocUser(buildUser(i), i);
-        }
+//        }catch (Exception e){
+//
+//        }
     }
 
     public RocUser buildUser(int i) {

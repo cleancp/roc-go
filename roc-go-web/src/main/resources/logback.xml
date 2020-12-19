@@ -61,6 +61,6 @@
     </root>
 
     <!-- 打印SQL -->
-<!--    <logger name="com.zhilingsd.training.business.dal" level="${log-level}"/>-->
+    <logger name="com.today.roc.go.dal" level="${log-level}"/>
 
 </configuration>

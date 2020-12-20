@@ -6,6 +6,7 @@ import com.today.roc.go.dal.model.RocUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -43,13 +44,15 @@ public class RocUserServiceImpl implements RocUserService {
     @Autowired
     private RocUserDao rocUserDao;
 
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class,
+            propagation = Propagation.NESTED
+    )
     @Override
     public void saveRocUser(RocUser rocUser, int i) {
+        rocUserDao.insert(rocUser);
         if (i == 3) {
             int a = 1 / 0;
         }
-        rocUserDao.insert(rocUser);
     }
 
 }

@@ -31,6 +31,6 @@ import org.springframework.transaction.annotation.Transactional;
  * log.info()
  */
 public interface RocInfoService {
-    @Transactional(rollbackFor = Exception.class)
+
     void saveRocInfo(int count);
 }

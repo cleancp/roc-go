@@ -51,10 +51,14 @@ public class RocInfoServiceImpl implements RocInfoService {
     //@Transactional(rollbackFor = Exception.class)
     @Override
     public void saveRocInfo(int count) {
-        for (int i = 0; i < count; i++) {
-            rocInfoDao.insert(buildInfo(i));
-            rocUserService.saveRocUser(buildUser(i), i);
-        }
+//        try {
+            for (int i = 0; i < count; i++) {
+                rocInfoDao.insert(buildInfo(i));
+                rocUserService.saveRocUser(buildUser(i), i);
+            }
+//        }catch (Exception e){
+//
+//        }
     }
 
     public RocUser buildUser(int i) {

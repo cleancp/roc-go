@@ -23,7 +23,7 @@ import java.util.Arrays;
  * log.info()
  */
 @Slf4j
-@SpringBootApplication(scanBasePackages = "com.today.roc.go*")
+@SpringBootApplication(scanBasePackages = "com.today.roc.go.*")
 @MapperScan(basePackages = "com.today.roc.go.dal.mapper")
 @EnableTransactionManagement
 public class RocGoApplication {
@@ -33,16 +33,16 @@ public class RocGoApplication {
         log.info("--------------启动成功----------------");
     }
 
-    @Bean
-    public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
-        return args -> {
-
-            System.out.println("Let's inspect the beans provided by Spring Boot:");
-            String[] beanNames = ctx.getBeanDefinitionNames();
-            Arrays.sort(beanNames);
-            for (String beanName : beanNames) {
-                System.out.println(beanName);
-            }
-        };
-    }
+//    @Bean
+//    public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
+//        return args -> {
+//
+//            System.out.println("Let's inspect the beans provided by Spring Boot:");
+//            String[] beanNames = ctx.getBeanDefinitionNames();
+//            Arrays.sort(beanNames);
+//            for (String beanName : beanNames) {
+//                System.out.println(beanName);
+//            }
+//        };
+//    }
 }

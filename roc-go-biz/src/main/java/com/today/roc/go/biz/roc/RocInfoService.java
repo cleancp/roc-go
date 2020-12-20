@@ -31,6 +31,9 @@ import org.springframework.transaction.annotation.Transactional;
  * log.info()
  */
 public interface RocInfoService {
+<<<<<<< HEAD
 
+=======
+>>>>>>> cfc76fcb603b681a381d348c6513762c0a1a2d6c
     void saveRocInfo(int count);
 }

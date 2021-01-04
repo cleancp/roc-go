@@ -1,0 +1,29 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Activiti处理引擎的配置，交由Spring管理 -->
+
+    <!-- spring负责创建流程引擎的配置文件 -->
+    <bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">
+        <!-- 配置数据源-->
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 配置事务管理器，统一事务 -->
+        <property name="transactionManager" ref="transactionManager" />
+        <!-- 设置建表策略，如果没有表，自动创建表 -->
+        <property name="databaseSchemaUpdate" value="true" />
+        <!-- 生成流程图的字体 -->
+        <property name="activityFontName" value="宋体"/>
+        <property name="labelFontName" value="宋体"/>
+        <property name="dbHistoryUsed" value="true"/>
+    </bean>
+<!--    <bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>-->
+
+    <bean id="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean">
+        <property name="processEngineConfiguration" ref="processEngineConfiguration"/>
+    </bean>
+    <!--
+    <bean id="testService2" class="com.imm.amo.controller.ActivitiTest"></bean>
+    -->
+</beans>

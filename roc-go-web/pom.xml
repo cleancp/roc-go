@@ -52,6 +52,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-spring-boot-starter-basic</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -123,6 +127,7 @@
                     <include>application.properties</include>
                     <include>application-${env}.properties</include>
                     <include>logback.xml</include>
+                    <include>/processes/*.xml</include>
                 </includes>
             </resource>
         </resources>

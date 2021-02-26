@@ -1,9 +1,6 @@
 package com.today.roc.go.understand.thread;
 
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
-import java.util.concurrent.FutureTask;
+import java.util.concurrent.*;
 
 /**
  * Software License Declaration.
@@ -42,6 +39,12 @@ public class ThreadCreateMain {
         @Override
         public void run() {
             System.out.println(this.getClass().getSimpleName() + "do something");
+            try {
+                TimeUnit.SECONDS.sleep(1);
+                System.out.println(this.getClass().getSimpleName() + "do something");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -72,12 +75,18 @@ public class ThreadCreateMain {
 
     public static void main(String[] args) {
         testThreadCreate();
-        testRunnableCreate();
-        testCallableCreate();
+//        testRunnableCreate();
+//        testCallableCreate();
     }
 
     public static void testThreadCreate() {
         ThreadCreate threadCreate = new ThreadCreate();
+        threadCreate.start();
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         threadCreate.start();
     }
 

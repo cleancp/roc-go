@@ -1,6 +1,4 @@
-package com.today.roc.go.biz.roc;
-
-import org.springframework.transaction.annotation.Transactional;
+package com.today.rocactiviti;
 
 /**
  * Software License Declaration.
@@ -27,9 +25,11 @@ import org.springframework.transaction.annotation.Transactional;
  * @author zou.cp
  * @version 1.0
  * @Description
- * @createTime 2020年12月18日 18:12*
+ * @createTime 2021年01月12日 17:52*
  * log.info()
  */
-public interface RocInfoService {
-    void saveRocInfo(int count);
+public class Test{
+
+
+
 }

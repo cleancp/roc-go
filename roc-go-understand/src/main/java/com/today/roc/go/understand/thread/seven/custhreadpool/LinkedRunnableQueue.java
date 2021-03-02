@@ -1,9 +1,8 @@
-package com.today.roc.go.understand.thread.seven;
+package com.today.roc.go.understand.thread.seven.custhreadpool;
 
 import com.google.common.collect.Lists;
 
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * ^---^---^---^---^---^---^---^

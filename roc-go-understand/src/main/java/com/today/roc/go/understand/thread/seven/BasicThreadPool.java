@@ -14,8 +14,55 @@ import java.util.concurrent.TimeUnit;
  * @createTime 2021年03月01日 23:38*
  * log.info()
  */
-public class BasicThreadPool extends Thread implements ThreadPool {
+public class BasicThreadPool implements ThreadPool {
 
+    /**
+     * 线程池线程
+     */
+    private Thread thread = new MaintainThread();
+
+    class MaintainThread extends Thread{
+        @Override
+        public void run() {
+            System.out.println("线程池线程工作情况："+Thread.currentThread());
+            //继承自Thread 用于维护线程数量，比如扩容、回收等工作
+            while (!isShutdown && ! isInterrupted()) {
+                try {
+                    timeUnit.sleep(keepAliveTime);
+                } catch (InterruptedException e) {
+                    shutdown();
+                    break;
+                }
+
+                synchronized (this) {
+                    if (isShutdown) {
+                        break;
+                    }
+
+                    //当队列有任务处理，且activeCount < coreSize 继续扩容
+                    if (runnableQueue.size() > 0 && activeCount < coreSize) {
+                        for (int i = activeCount; i < coreSize; i++) {
+                            createThread();
+                        }
+                        //continue是为了防止 线程扩容一下子到maxSize
+                        continue;
+                    }
+                    //当前队列有任务，且活跃线程数大于核心线程数 小于最大线程数
+                    if (runnableQueue.size() > 0 && activeCount < maxSize) {
+                        for (int i = activeCount; i < maxSize; i++) {
+                            createThread();
+                        }
+                    }
+                    //如果队列中没有任务 需要回收线程
+                    if (runnableQueue.size() == 0 && activeCount > coreSize) {
+                        for (int i = coreSize; i < activeCount; i++) {
+                            removeThread();
+                        }
+                    }
+                }
+            }
+        }
+    }
     /**
      * 初始线程
      */
@@ -54,7 +101,7 @@ public class BasicThreadPool extends Thread implements ThreadPool {
     private LinkedRunnableQueue runnableQueue;
 
     public static final ThreadFactory DEFAULT_THREAD_FACTORY = new DefaultThreadFactory();
-    public static final DenyPolicy    DEFAULT_DENY_POLICY    = new DenyPolicy.DiscardDenyPolicy();
+    public static final DenyPolicy    DEFAULT_DENY_POLICY    = new DenyPolicy.RunnerDenyPolicy();
 
     /**
      * 工作线程
@@ -67,6 +114,9 @@ public class BasicThreadPool extends Thread implements ThreadPool {
 
     public BasicThreadPool(int initSize, int coreSize, int maxSize, ThreadFactory threadFactory,
                            int queueSize, int keepAliveTime, TimeUnit timeUnit, DenyPolicy denyPolicy) {
+        if (initSize>coreSize || coreSize>maxSize){
+            throw new RuntimeException("initSize should be <= coreSize coreSize should be <= max");
+        }
         this.initSize = initSize;
         this.coreSize = coreSize;
         this.maxSize = maxSize;
@@ -76,8 +126,7 @@ public class BasicThreadPool extends Thread implements ThreadPool {
         this.runnableQueue = new LinkedRunnableQueue(queueSize, denyPolicy, this);
         this.init();
     }
-
-    @Override
+    /**
     public void run() {
         //继承自Thread 用于维护线程数量，比如扩容、回收等工作
         while (!isShutdown && !isInterrupted()) {
@@ -103,7 +152,7 @@ public class BasicThreadPool extends Thread implements ThreadPool {
                 }
                 //当前队列有任务，且活跃线程数大于核心线程数 小于最大线程数
                 if (runnableQueue.size() > 0 && activeCount < maxSize) {
-                    for (int i = coreSize; i < activeCount; i++) {
+                    for (int i = activeCount; i < maxSize; i++) {
                         createThread();
                     }
                 }
@@ -116,12 +165,14 @@ public class BasicThreadPool extends Thread implements ThreadPool {
             }
         }
     }
+    */
 
     /**
      * 线程池初始化线程
      */
     private void init() {
-        this.start();
+        thread.setName("thread-pool-ext");
+        thread.start();
         for (int i = 0; i < initSize; i++) {
             createThread();
         }
@@ -161,12 +212,13 @@ public class BasicThreadPool extends Thread implements ThreadPool {
             }
             threadTaskQueue.forEach(
                     v -> {
+                        //停止获取任务线程
                         v.internalTask.stop();
-                        //
+                        //停止线程
                         v.thread.interrupt();
                     }
             );
-            this.interrupt();
+            this.thread.interrupt();
         }
     }
 

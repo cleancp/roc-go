@@ -1,5 +1,6 @@
 package com.today.roc.go.understand.thread.seven;
 
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -16,12 +17,14 @@ public class TestThreadPool {
 
     public static void main(String[] args) throws InterruptedException {
 
-        ThreadPool pool = new BasicThreadPool(2,4,6,1000);
-        for (int i = 0; i < 20; i++) {
+        ThreadPool pool = new BasicThreadPool(2,4,6,100);
+        Random random = new Random();
+        for (int i = 0; i < 40; i++) {
             pool.execute(()->{
                 try {
-                    TimeUnit.SECONDS.sleep(10);
-                    System.out.println(Thread.currentThread()+ " is running and done .");
+                    int timeOut = random.nextInt(5) + 1;
+                    TimeUnit.SECONDS.sleep(timeOut);
+                    System.out.println(Thread.currentThread()+ " is running and done . "+ timeOut);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

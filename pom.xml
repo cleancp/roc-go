@@ -29,11 +29,24 @@
         <lombok_version>1.18.12</lombok_version>
         <guava_version>29.0-jre</guava_version>
         <!--        <mysql_version>5.1.25</mysql_version>-->
-        <mysql_version>8.0.15</mysql_version>
-        <druid_version>1.0.15</druid_version>
-        <mybatis.spring.version>1.3.0</mybatis.spring.version>
         <mapper.spring.version>1.1.3</mapper.spring.version>
         <activity_version>6.0.0</activity_version>
+        <!-- mybatis 相关版本 -->
+        <mybatis.plus.version>3.3.1</mybatis.plus.version>
+        <mybatis.plus.boot.version>3.3.1</mybatis.plus.boot.version>
+        <mybatis.plus.generator.version>3.3.1</mybatis.plus.generator.version>
+        <mybatis.spring.version>2.0.3</mybatis.spring.version>
+        <mybatis.version>3.5.3</mybatis.version>
+        <mybatis.typehandlers.version>1.0.2</mybatis.typehandlers.version>
+        <!-- Druid 版本-->
+        <druid.version>1.1.21</druid.version>
+        <!-- MySql 数据库驱动 版本-->
+        <mysql.connector.java>8.0.19</mysql.connector.java>
+
+        <!-- mapstruct -->
+        <mapstruct.version>1.3.0.Final</mapstruct.version>
+        <transmittable.version>2.11.4</transmittable.version>
+
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -82,22 +95,76 @@
                 <artifactId>roc-go-biz</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <!--Mybatis Plus-->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus</artifactId>
+                <version>${mybatis.plus.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis.plus.boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId>
+                <version>${mybatis.plus.generator.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>${mybatis.spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-typehandlers-jsr310</artifactId>
+                <version>${mybatis.typehandlers.version}</version>
+            </dependency>
+
+            <!-- Druid 德鲁伊数据库连接池-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+
+            <!-- MySql 数据库驱动包-->
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql_version}</version>
+                <version>${mysql.connector.java}</version>
             </dependency>
+
+            <!--mapstruct-->
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-jdk8</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>com.alibaba</groupId>
-                <artifactId>druid</artifactId>
-                <version>${druid_version}</version>
+                <artifactId>transmittable-thread-local</artifactId>
+                <version>${transmittable.version}</version>
             </dependency>
-            <!-- mybatis -->
-            <dependency>
-                <groupId>org.mybatis.spring.boot</groupId>
-                <artifactId>mybatis-spring-boot-starter</artifactId>
-                <version>${mybatis.spring.version}</version>
-            </dependency>
+
             <!-- spring boot -->
             <!--相当于一个大的dependencyManagement 版本适配好的 ，子项目可以使用里面的依赖 -->
             <dependency>

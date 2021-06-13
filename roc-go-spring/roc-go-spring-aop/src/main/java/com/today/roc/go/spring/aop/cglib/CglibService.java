@@ -28,7 +28,7 @@ package com.today.roc.go.spring.aop.cglib;
  * @createTime 2020年08月24日 17:30*
  * log.info()
  */
-public class CglibService {
+public final class CglibService {
 
     public void other() {
         System.out.println("other");

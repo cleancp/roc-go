@@ -37,7 +37,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ConcurrentHashMapMain {
 
     /**
-     * JDK 8 中采用的是位桶 + 链表/红黑树的方式，当某个位桶的链表的长度超过 8 的时候，这个链表就将转换成红黑树
+     * JDK 8 中采用的是数组 + 链表/红黑树的方式，当某个数组的链表的长度超过 8 的时候，这个链表就将转换成红黑树
      * HashMap 不会因为多线程 put 导致死循环（JDK 8 用 head 和 tail 来保证链表的顺序和之前一样；JDK 7 rehash 会倒置链表元素），
      * 但是还会有数据丢失等弊端（并发本身的问题）。因此多线程情况下还是建议使用 ConcurrentHashMap
      *

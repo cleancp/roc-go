@@ -62,8 +62,8 @@ public class ThreadApi {
     }
 
     public static void main(String[] args) {
-        //testYield();
-        testPriority();
+        testYield();
+//        testPriority();
     }
 
     private static void testPriority() {

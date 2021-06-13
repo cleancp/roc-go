@@ -43,6 +43,7 @@ public class ThreadLoclMain {
     public static void main(String[] args) {
         ThreadLoclMain main = new ThreadLoclMain();
         main.learnThreadLocal();
+        main.learnThreadLocalMap();
     }
 
     public void learnThreadLocalMap(){
@@ -51,6 +52,9 @@ public class ThreadLoclMain {
          * ThreadLocalMap 是ThreadLocal的静态内部类，key就是this(ThreadLocal) value 是当前线程设置的值
          */
         threadLocal.set("1");
+        threadLocal.set("2");
+        Object o = threadLocal.get();
+        threadLocal.remove();
     }
 
     private void learnThreadLocal() {

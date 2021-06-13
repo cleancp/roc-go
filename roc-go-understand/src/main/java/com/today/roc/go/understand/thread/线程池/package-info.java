@@ -59,7 +59,7 @@ package com.today.roc.go.understand.thread.线程池;
  * 直接提交队列、SynchronousQueue，提交的任务不会被缓存，而是直接执行，若用于执行任务的线程数量大于maximumPoolSize，执行拒绝策略。适合已经准确知道并发量的业务使用。
  * 有界任务队列、ArrayBlockingQueue，提交的任务小于corePoolSize，则会继续创建线程直到大于corePoolSize，大于corePoolSize会放到等待队列中，直到超过等待队列的容量，
  *              新任务将会继续创建线程，直到大于maximumPoolSize，执行拒绝策略。
- *              线程数量的上限与有界任务队列的状态有直接关系，如果任务数量小于小于等待队列容量或者任务队列容量很大，那线程数量上限小于corePoolSize,反之当等待队列满时，
+ *              线程数量的上限与有界任务队列的状态有直接关系，如果任务数量小于等待队列容量或者任务队列容量很大，那线程数量上限小于corePoolSize,反之当等待队列满时，
  *              以maximumPoolSize为线程数量上限
  * 无界任务队列、LinkedBlockingQueue，使用无界队列，如果任务数小于corePoolSize，则会继续创建线程直到等于corePoolSize，大于corePoolSize队列会一直增加任务，
  *              线程数量上限为corePoolSize，此时maximumPoolSize参数无效，业务上使用无界队列需要注意，如果任务数一直增长，而任务执行慢，长时间可能导致太多任务占满资源

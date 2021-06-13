@@ -76,7 +76,7 @@ public class ThreadCreateMain {
     public static void main(String[] args) {
         testThreadCreate();
 //        testRunnableCreate();
-//        testCallableCreate();
+        testCallableCreate();
     }
 
     public static void testThreadCreate() {

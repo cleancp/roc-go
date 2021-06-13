@@ -1,6 +1,7 @@
 package com.today.roc.go.understand.thread.synchronous;
 
 import java.lang.reflect.Method;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Software License Declaration.
@@ -31,9 +32,10 @@ import java.lang.reflect.Method;
  * log.info()
  */
 public class SynchronizedMain {
-
-    private Object obj1 = new Object();
-    private Object obj2 = new Object();
+    private static Object staticObj1 = new Object();
+    private static Object staticObj2 = new Object();
+    private        Object obj1       = new Object();
+    private        Object obj2       = new Object();
 
     public synchronized void methodTest() {
         sout(Thread.currentThread().getStackTrace()[1].getMethodName());
@@ -49,6 +51,30 @@ public class SynchronizedMain {
 
     public synchronized static void statisMethodTestTwo() {
         soutStatic(Thread.currentThread().getStackTrace()[1].getMethodName());
+    }
+
+    public void lockStaticObj1() {
+        synchronized (staticObj1) {
+            System.out.println(Thread.currentThread().getName() + "开始准备睡眠 lockStaticObj1");
+            try {
+                TimeUnit.SECONDS.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(Thread.currentThread().getName() + "睡眠完成 lockStaticObj1");
+        }
+    }
+
+    public void lockStaticObj2() {
+        synchronized (staticObj2) {
+            System.out.println(Thread.currentThread().getName() + "开始准备睡眠 lockStaticObj2");
+            try {
+                TimeUnit.SECONDS.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(Thread.currentThread().getName() + "睡眠完成 lockStaticObj2");
+        }
     }
 
     public void otherObjTest() {
@@ -84,20 +110,20 @@ public class SynchronizedMain {
         //lockStatic();
         //lockThisObj(main);
         //lockMethod(main);
-        lockOtherObj(main);
+        //lockOtherObj(main);
+        SynchronizedMain main1 = new SynchronizedMain();
+        lockStaticObj(main, main1);
     }
 
-    /**
-     * 锁住其它对象
-     */
-    private static void lockOtherObj(SynchronizedMain main){
+
+    private static void lockOtherObj(SynchronizedMain main) {
         new Thread() {
             @Override
             public void run() {
                 main.otherObjTest();
             }
         }.start();
-        new Thread(){
+        new Thread() {
             @Override
             public void run() {
                 main.otherObjTwoTest();
@@ -106,16 +132,34 @@ public class SynchronizedMain {
     }
 
     /**
+     * 锁住其它对象
+     */
+    private static void lockStaticObj(SynchronizedMain main, SynchronizedMain main1) {
+        new Thread() {
+            @Override
+            public void run() {
+                main.lockStaticObj1();
+            }
+        }.start();
+        new Thread() {
+            @Override
+            public void run() {
+                main1.lockStaticObj2();
+            }
+        }.start();
+    }
+
+    /**
      * 锁的是类对象，所有调用静态方法都会被锁住
      */
-    private static void lockStatic(Method method){
+    private static void lockStatic(Method method) {
         new Thread() {
             @Override
             public void run() {
                 SynchronizedMain.statisMethodTest();
             }
         }.start();
-        new Thread(){
+        new Thread() {
             @Override
             public void run() {
                 SynchronizedMain.statisMethodTestTwo();
@@ -125,6 +169,7 @@ public class SynchronizedMain {
 
     /**
      * 锁的还是调用该方法的对象，也就是this ， 如果是不同对象，锁不生效
+     *
      * @param main
      */
     private static void lockMethod(SynchronizedMain main) {
@@ -135,7 +180,7 @@ public class SynchronizedMain {
                 //new SynchronizedMain().methodTest();
             }
         }.start();
-        new Thread(){
+        new Thread() {
             @Override
             public void run() {
                 main.methodTestTwo();
@@ -146,6 +191,7 @@ public class SynchronizedMain {
 
     /**
      * 锁的还是调用该方法的对象，也就是this ， 如果是不同对象，锁不生效
+     *
      * @param main
      */
     private static void lockThisObj(SynchronizedMain main) {

@@ -1,4 +1,4 @@
-package com.today.roc.go.understand.java8._1default;
+package com.today.roc.go.understand.java8._01default;
 
 /**
  * ^---^---^---^---^---^---^---^
@@ -18,6 +18,13 @@ public class _01Main {
         testDefault.say();
         testDefault.eat("");
 
+        TestDefault testDefault1 = new TestDefault() {
+            @Override
+            public void say() {
+                System.out.println("匿名内部类：say ");
+            }
+        };
+        testDefault1.say();
     }
 
 }

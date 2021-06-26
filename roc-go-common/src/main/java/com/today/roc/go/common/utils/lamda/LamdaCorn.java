@@ -3,10 +3,12 @@ package com.today.roc.go.common.utils.lamda;
 import com.google.common.collect.Lists;
 import com.today.roc.go.common.bo.JsonBO;
 import com.today.roc.go.common.utils.json.JsonUtils;
+import org.apache.commons.lang3.ObjectUtils;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -22,13 +24,31 @@ import java.util.stream.Collectors;
 public class LamdaCorn {
 
     public static void main(String[] args) {
-        JsonBO jsonBO = JsonUtils.buildObject(JsonBO.class, 10);
+        //JsonBO jsonBO = JsonUtils.buildObject(JsonBO.class, 10);
         //testAnonymous();
         //排序
         //testSorted(jsonBO);
         //testStatistics(jsonBO);
-        testReduce(jsonBO);
-        testFilter(jsonBO);
+        //testReduce(jsonBO);
+        //testFilter(jsonBO);
+//        list.stream().filter(v1 -> ObjectUtils.anyNotNull(v1.getCode(), v1.getShopId())).
+//                collect(Collectors.toMap(v -> Optional.ofNullable(v.getCode()).orElse("") + Optional.ofNullable(v.getShopId()).orElse(0L), v -> v));
+
+
+        List<User> userList = Lists.newArrayList();
+        userList.add(new User(1,"1",1));
+        userList.add(new User(1,"1",2));
+        userList.stream().collect(Collectors.groupingBy(v->v.getId()+v.getName())).forEach(
+                (k,v)->{
+                    System.out.println(k+v.size());
+                }
+        );
+        userList.stream().collect(Collectors.toMap(v -> v.getId() + v.getName(), v -> v,(v1,v2)->v1))
+                .forEach(
+                (k,v)->{
+                    System.out.println(k+v.getAge());
+                }
+        );
     }
 
     public static void testReduce(JsonBO jsonBO) {

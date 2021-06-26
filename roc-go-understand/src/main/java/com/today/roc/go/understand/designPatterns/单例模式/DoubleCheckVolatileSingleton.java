@@ -3,6 +3,7 @@ package com.today.roc.go.understand.designPatterns.单例模式;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import java.io.Serializable;
 import java.net.Socket;
 
 /**
@@ -15,7 +16,7 @@ import java.net.Socket;
  * @createTime 2021年03月09日 00:27*
  * log.info()
  */
-public class DoubleCheckVolatileSingleton {
+public class DoubleCheckVolatileSingleton implements Serializable {
 
     /**
      * 优点：懒加载，线程安全，性能可以
@@ -23,16 +24,16 @@ public class DoubleCheckVolatileSingleton {
      */
     private byte[] data = new byte[1024];
 
-    Context context;
-    Socket  socket;
+    //Context context;
+    //Socket  socket;
 
     //解决有序性问题
     private volatile static DoubleCheckVolatileSingleton instance = null;
 
     //构造私有
     private DoubleCheckVolatileSingleton() throws NamingException {
-        this.context = new InitialContext();
-        this.socket = new Socket();
+        //this.context = new InitialContext();
+        //this.socket = new Socket();
     }
 
     /**
@@ -48,4 +49,5 @@ public class DoubleCheckVolatileSingleton {
         }
         return instance;
     }
+
 }

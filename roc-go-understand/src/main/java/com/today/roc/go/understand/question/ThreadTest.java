@@ -1,10 +1,13 @@
 package com.today.roc.go.understand.question;
 
 import lombok.AllArgsConstructor;
-import org.apache.poi.ss.formula.functions.T;
+import lombok.SneakyThrows;
 
-import java.util.Currency;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * ^---^---^---^---^---^---^---^
@@ -18,14 +21,64 @@ import java.util.concurrent.TimeUnit;
  */
 public class ThreadTest {
 
+    static Lock twolock = new ReentrantLock();
+    static volatile int state = 0;
+
+    static Lock threeLock = new ReentrantLock();
+    static Condition Acon = threeLock.newCondition();
+    static Condition Bcon = threeLock.newCondition();
+    static Condition Ccon = threeLock.newCondition();
+
+    static Semaphore Asemaphore = new Semaphore(1);
+    static Semaphore Bsemaphore = new Semaphore(0);
+    static Semaphore Csemaphore = new Semaphore(0);
+
     //三线程按顺序交替打印ABC的四种方法
     public static void main(String[] args) throws InterruptedException {
+        //printMethodOne();
+        //printMethodTwo();
+        printMethodThree();
+        //printMethodFour();
+    }
+    /**Semaphore 控制输出几次*/
+    private static void printMethodFour() {
+        //A  B  C
+        FourMethodThread t1 = new FourMethodThread("A",Asemaphore,Bsemaphore);
+        FourMethodThread t2 = new FourMethodThread("B",Bsemaphore,Csemaphore);
+        FourMethodThread t3 = new FourMethodThread("C",Csemaphore,Asemaphore);
+        t1.start();
+        t2.start();
+        t3.start();
+    }
+
+    /**condition 控制输出几次 控制 当前执行-下个释放*/
+    private static void printMethodThree(){
+        //A  B  C
+        ThreeMethodThread t1 = new ThreeMethodThread("A",0,Bcon,Acon);
+        ThreeMethodThread t2 = new ThreeMethodThread("B",1,Ccon,Bcon);
+        ThreeMethodThread t3 = new ThreeMethodThread("C",2,Acon,Ccon);
+        t2.start();
+        t1.start();
+        t3.start();
+    }
+    /**ReentrantLock*/
+    private static void printMethodTwo() {
+        //A  B  C
+        TwoMethodThread t1 = new TwoMethodThread("A",0);
+        TwoMethodThread t2 = new TwoMethodThread("B",1);
+        TwoMethodThread t3 = new TwoMethodThread("C",2);
+        t1.start();
+        t2.start();
+        t3.start();
+    }
+    /**synchronized wait*/
+    private static void printMethodOne() throws InterruptedException {
         Object a = new Object();
         Object b = new Object();
         Object c = new Object();
-        CustomThread t1 = new CustomThread("A",c,a);
-        CustomThread t2 = new CustomThread("B",a,b);
-        CustomThread t3 = new CustomThread("C",b,c);
+        OneMethodThread t1 = new OneMethodThread("A",c,a);
+        OneMethodThread t2 = new OneMethodThread("B",a,b);
+        OneMethodThread t3 = new OneMethodThread("C",b,c);
 
         new Thread(t1).start();
         TimeUnit.SECONDS.sleep(1);
@@ -36,7 +89,7 @@ public class ThreadTest {
     }
 
     @AllArgsConstructor
-    static class CustomThread implements Runnable{
+    static class OneMethodThread implements Runnable{
         String name ;
         Object prev ;
         Object self ;
@@ -64,4 +117,71 @@ public class ThreadTest {
         }
     }
 
+    @AllArgsConstructor
+    static class TwoMethodThread extends Thread{
+        String name ;
+        final int bit;
+        @SneakyThrows
+        @Override
+        public void run() {
+            for (int i = 0; i < 5;) {
+                try {
+                    twolock.lock();
+                    while (state % 3 == bit) {
+                        System.out.println(name);
+                        state ++ ;
+                        TimeUnit.MILLISECONDS.sleep(500);
+                        i++;
+                    }
+                }finally {
+                    twolock.unlock();
+                }
+            }
+        }
+    }
+
+    @AllArgsConstructor
+    static class ThreeMethodThread extends Thread{
+        String name ;
+        final int bit;
+        Condition signal;
+        Condition await;
+        @SneakyThrows
+        @Override
+        public void run() {
+            try {
+                threeLock.lock();
+                for (int i = 0; i < 5;) {
+                    //不等于自己就一直等待
+                    while (state % 3 != bit) {
+                        await.await();
+                    }
+                    System.out.println(name);
+                    state ++ ;
+                    TimeUnit.MILLISECONDS.sleep(500);
+                    i++;
+                    signal.signal();
+                }
+            }finally {
+                threeLock.unlock();
+            }
+        }
+    }
+
+    @AllArgsConstructor
+    static class FourMethodThread extends Thread{
+        String name ;
+        Semaphore acquire;
+        Semaphore release;
+        @SneakyThrows
+        @Override
+        public void run() {
+            for (int i = 0; i < 5;i++) {
+                acquire.acquire();//A 释放  B 释放 C 释放
+                TimeUnit.MILLISECONDS.sleep(500);
+                System.out.println(name);
+                release.release(); //B获取  C 获取 A 获取
+            }
+        }
+    }
 }

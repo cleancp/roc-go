@@ -80,6 +80,7 @@ public class ThreadTest {
         OneMethodThread t2 = new OneMethodThread("B",a,b);
         OneMethodThread t3 = new OneMethodThread("C",b,c);
 
+
         new Thread(t1).start();
         TimeUnit.SECONDS.sleep(1);
         new Thread(t2).start();

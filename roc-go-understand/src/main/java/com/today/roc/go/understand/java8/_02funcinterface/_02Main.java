@@ -1,5 +1,7 @@
 package com.today.roc.go.understand.java8._02funcinterface;
 
+import java.util.function.BiConsumer;
+
 /**
  * ^---^---^---^---^---^---^---^
  * --v---v---v---v---v---v---v--
@@ -13,6 +15,11 @@ package com.today.roc.go.understand.java8._02funcinterface;
 public class _02Main {
 
     public static void main(String[] args) {
+        //ownTest();
+        testBiConsumer();
+    }
+
+    private static void ownTest() {
         _01FunctionInterface i = new _01FunctionInterface() {
             @Override
             public String say(String msg) {
@@ -25,5 +32,24 @@ public class _02Main {
 //        _01FunctionInterface b1 = a -> "" + a;
         String hello = b.say("hello");
         b.eat();
+    }
+
+    public static void testBiConsumer(){
+        BiConsumer<Integer,Integer> biConsumer = new BiConsumer<Integer, Integer>() {
+            @Override
+            public void accept(Integer integer, Integer integer2) {
+                System.out.println("value1:"+integer);
+                System.out.println("value2:"+integer2);
+            }
+        };
+        BiConsumer<Integer,Integer> biConsumer2 = new BiConsumer<Integer, Integer>() {
+            @Override
+            public void accept(Integer integer, Integer integer2) {
+                System.out.println("biConsumer2 value1:"+integer);
+                System.out.println("biConsumer2 value2:"+integer2);
+            }
+        };
+        //biConsumer.accept(1,2);
+        biConsumer.andThen(biConsumer2).accept(1,2);
     }
 }

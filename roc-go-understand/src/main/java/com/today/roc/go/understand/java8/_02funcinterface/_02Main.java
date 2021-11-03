@@ -1,6 +1,14 @@
 package com.today.roc.go.understand.java8._02funcinterface;
 
+import com.google.common.collect.Lists;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.function.BiConsumer;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * ^---^---^---^---^---^---^---^
@@ -16,7 +24,14 @@ public class _02Main {
 
     public static void main(String[] args) {
         //ownTest();
-        testBiConsumer();
+        // testBiConsumer();
+        streamTest();
+    }
+
+    public static void streamTest(){
+        List<Integer> list = Lists.newArrayList();
+        IntStream.range(1,5).forEach(v->list.add(v));
+        list.stream().collect(Collectors.toMap(v->v,v->v,(v1,v2)->v1));
     }
 
     private static void ownTest() {

@@ -19,6 +19,7 @@
         <module>roc-go-spring</module>
         <module>roc-go-understand</module>
         <module>roc-go-verify</module>
+        <module>roc-go-websocket</module>
     </modules>
 
     <properties>

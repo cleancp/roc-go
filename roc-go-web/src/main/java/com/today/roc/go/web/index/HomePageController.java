@@ -2,12 +2,12 @@ package com.today.roc.go.web.index;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.collect.Lists;
-import com.today.roc.go.common.utils.json.JacksonUtils;
-import com.today.roc.go.dto.request.homepage.RocHomePageDto;
-import com.today.roc.go.dto.request.homepage.RocKeywordRecordDto;
-import com.today.roc.go.dto.response.homepage.HomeOthersVo;
-import com.today.roc.go.dto.response.homepage.HomePageVo;
-import com.today.roc.go.dto.response.homepage.KeyWordTeamVo;
+import com.today.utils.json.JacksonUtils;
+import com.today.request.homepage.RocHomePageDto;
+import com.today.request.homepage.RocKeywordRecordDto;
+import com.today.response.homepage.HomeOthersVo;
+import com.today.response.homepage.HomePageVo;
+import com.today.response.homepage.KeyWordTeamVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;

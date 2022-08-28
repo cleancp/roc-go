@@ -19,7 +19,6 @@
         <module>roc-go-verify</module>
         <module>roc-go-websocket</module>
         <module>roc-go-tuling</module>
-        <module>roc-go-tuling</module>
     </modules>
 
     <properties>
@@ -142,6 +141,12 @@
                 <groupId>org.mapstruct</groupId>
                 <artifactId>mapstruct-jdk8</artifactId>
                 <version>${mapstruct.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok_version}</version>
             </dependency>
 
             <dependency>

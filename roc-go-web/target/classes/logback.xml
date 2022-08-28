@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration>
     <!-- 日志输出位置，放到服务器/data/logs/项目名称 -->
-    <property name="logRoot" value="E://roc-go"/>
+    <property name="logRoot" value="${basepath}/roc-go"/>
     <!--日志文件输出日志格式-->
     <property name="logPatten" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %X{BOOT_TRACE_CONTEXT:-} %thread %logger{35} %level - %.-15000msg %n"/>
     <!--控制台输出的日志格式-->
@@ -13,13 +13,13 @@
             <pattern>${consolePatten}</pattern>
         </encoder>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>INFO</level>
+            <level>${log-level}</level>
         </filter>
     </appender>
 
     <appender name="INFO-OUT" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>INFO</level>
+            <level>${log-level}</level>
         </filter>
         <file>${logRoot}/info.log</file>
         <encoder>
@@ -61,6 +61,6 @@
     </root>
 
     <!-- 打印SQL -->
-    <logger name="com.today.roc.go.dal" level="INFO"/>
+    <logger name="com.today.roc.go.dal" level="${log-level}"/>
 
 </configuration>

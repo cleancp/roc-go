@@ -17,6 +17,7 @@ import java.time.format.DateTimeFormatter;
  * log.info()
  */
 public class _05Main {
+    // http://t.zoukankan.com/cchilei-p-14597080.html
     public static void main(String[] args) {
 
         Clock clock = Clock.systemDefaultZone();

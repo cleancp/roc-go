@@ -30,7 +30,7 @@ public class ReentrantLockLearn {
     public static void main(String[] args) throws InterruptedException {
         ReentrantLockLearn learn = new ReentrantLockLearn();
         // 同步执行
-        // learn.syncExec();
+        learn.syncExec();
         // 可重入
         // learn.reentrantAble();
         // 可中断
@@ -41,7 +41,7 @@ public class ReentrantLockLearn {
         //learn.fairAndUnfairLock(fairLock);
         //learn.fairAndUnfairLock(lock);
         // 条件锁
-        learn.condition();
+        //learn.condition();
     }
 
     public void condition(){
